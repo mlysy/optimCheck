@@ -1,0 +1,30 @@
+context("Quantile regression")
+
+# quantile regression objective function
+qr.obj <- function(y, X, beta, tau) {
+  u <- y - c(X %*% beta)
+  sum(u * (tau - (u < 0)))
+}
+
+# automated tests
+ntest <- 20
+test_that("quantreg::rq converges to local mode", {
+  skip_if_not(requireNamespace("quantreg", quietly = TRUE),
+              "quantreg package required to run this test.")
+  require(quantreg)
+  replicate(ntest, expr = {
+    n <- sample(100:1000, 1)
+    p <- sample(1:20, 1)
+    X <- matrix(rnorm(n*p), n, p)
+    colnames(X) <- paste0("x", 1:p)
+    beta <- rnorm(p)
+    y <- c(X %*% beta) + rnorm(n)
+    ds <- data.frame(y = y, X)
+    tau <- runif(1)
+    M <- rq(y ~ . - 1, tau = tau, data = ds)
+    beta.hat <- coef(M)
+    expect_true(all(optim_check(loglik = function(beta) {
+      -qr.obj(y = y, X = X, beta = beta, tau = tau)
+    }, theta.mle = beta.hat, plot = FALSE)))
+  })
+})
