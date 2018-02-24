@@ -1,23 +1,33 @@
-#' Numerical check for MLE.
+#' Check solution of an optimization routine.
 #'
 #' Given a log-likelihood function and a potential MLE, checks whether each one-dimensional version of the log-likelihood which varies one parameter at a time with all others at the MLE is indeed maximized at the MLE value.
 #'
-#' @param loglik loglikelihood function.  Takes a single vector argument.
-#' @param theta.mle The potential MLE.
+#' @param theta Value of potential solution vector.
+#' @param fun Objective function to be maximized (or minimized), with first argument the parameter vector over which optimization is to take place.  Should return a scalar result.
 #' @param itheta indices of one dimensional functions to evaluate and plot.  Defaults to all parameters.
 #' @param theta.names Optional vector of parameter names for plotting.
 #' @param theta.rng Optional two-row matrix giving the plotting limits for each parameter.  Defaults to theta.mle +/- .5 * abs(theta.mle)
 #' @param refit If \code{TRUE}, recalculates the range so that drop is more or less the same on either side of \code{theta.mle}.
 #' @param layout Optional vector giving the number of rows and columns in the plot.  For \code{p} parameters, defaults to \code{c(nr, nc)}, where \code{nr = floor(p)} and \code{nc = ceiling(p/nr)}.
 #' @param plot Logical, whether or not to plot the conditional likelihoods.  See Value for details.
-#' @return A logical vector of length \code{p}, indicating whether or not the MLE was the maximum of the plotted points along each coordinate.  This is for numerically checking what the plots otherwise do visually.
+#' @return An object of class \code{optimCheck} consisting of the elements:
+#' \describe{
+#'   \item{\code{theta}}{The potential solution.}
+#'   \item{\code{value}}{The value of \code{fun(theta)}.}
+#'   \item{\code{x}}{An \code{npts x ntheta} matrix where each column is the \code{x}-axis of the projection plot along the given component of \code{theta}.}
+#'   \item{\code{y}}{An \code{npts x ntheta} matrix where each column is the \code{y}-axis of the corresponding projection plot.}
+#' }
+#' The object is returned invisibly if \code{plot = TRUE}.
 #' @export
-optim_check <- function(loglik, theta.mle, itheta, theta.names, theta.rng,
+optim_check <- function(theta, fun, itheta, theta.names, theta.rng,
                         refit = TRUE, layout, plot = TRUE) {
-  ntheta <- length(theta.mle) # number of parameters
+  theta.sol <- theta
+  ntheta <- length(theta.sol) # number of parameters
   npts <- 200 # number of points to plot
-  is.mle <- rep(NA, ntheta) # check whether MLE maximizes 1d loglikelihoods
-  ll.max <- loglik(theta.mle) # maximum value
+  ## is.mle <- rep(NA, ntheta) # check whether MLE maximizes 1d loglikelihoods
+  xout <- matrix(NA, npts, ntheta) # x-axis of plots
+  yout <- matrix(NA, npts, ntheta) # y-axis of plots
+  ll.max <- fun(theta.sol) # maximum value
   if(missing(itheta)) itheta <- 1:ntheta
   if(is.logical(itheta)) itheta <- which(itheta) # convert T/F's to indices
   if(missing(theta.names)) {
@@ -26,8 +36,11 @@ optim_check <- function(loglik, theta.mle, itheta, theta.names, theta.rng,
     theta.names <- parse(text = theta.names)
   }
   if(missing(theta.rng)) {
-    theta.rng <- rbind(theta.mle - .5 * abs(theta.mle),
-                       theta.mle + .5 * abs(theta.mle))
+    # default range is +/- .5 * max(abs(theta))
+    theta.rng <- .5 * abs(theta.sol)
+    theta.rng <- rbind(theta.sol - theta.rng, theta.sol + theta.rng)
+    ## theta.rng <- rbind(theta.sol - .5 * abs(theta.sol),
+    ##                    theta.sol + .5 * abs(theta.sol))
   }
   # shorten theta.names and theta.rng if necessary
   ntheta2 <- length(itheta)
@@ -52,14 +65,14 @@ optim_check <- function(loglik, theta.mle, itheta, theta.names, theta.rng,
     for(jj in 1:2) {
       # evaluate likelihood fixing all components except one
       theta.ll <- sapply(theta.seq, function(thetai) {
-        theta <- theta.mle
+        theta <- theta.sol
         theta[ith] <- thetai
-        loglik(theta)
+        fun(theta)
       })
       if(jj == 1 && refit) {
         vth <- !is.na(theta.ll) & theta.ll > -Inf # valid values
-        lth <- theta.seq < theta.mle[ith] # on the left of mle
-        rth <- theta.seq > theta.mle[ith] # on the right
+        lth <- theta.seq < theta.sol[ith] # on the left of mle
+        rth <- theta.seq > theta.sol[ith] # on the right
         # larger of the min value on each size
         lbd <- max(min(theta.ll[vth & lth]), min(theta.ll[vth & rth]))
         # rescale theta.seq to be on this range
@@ -68,24 +81,29 @@ optim_check <- function(loglik, theta.mle, itheta, theta.names, theta.rng,
         theta.seq <- seq(theta.seq[ibd[1]], theta.seq[ibd[2]], len = 200)
       } else break
     }
-    # numerical check
-    is.mle[ii] <- ll.max >= max(theta.ll)
+    # store calcs
+    xout[,ith] <- theta.seq
+    yout[,ith] <- theta.ll
+    ## # numerical check
+    ## is.mle[ii] <- ll.max >= max(theta.ll)
     if(plot) {
       # plot loglikelihood and add estimated value
       graphics::plot(theta.seq, theta.ll, type = "l",
                      xlab = "", ylab = "")
       title(main = theta.names[ii], cex.main = 2)
-      abline(v = theta.mle[ith], col = "red")
+      abline(v = theta.sol[ith], col = "red")
     }
   }
+  ans <- list(theta = theta.sol, value = ll.max, x = xout, y = yout)
+  class(ans) <- "optimCheck"
   if(plot) {
     # labels in margin
     mtext(side = 2, text = "Log-Likelihood",
           line = 1, outer = TRUE)
     mtext(side = 1, text = "Parameter",
           line = 1, outer = TRUE)
-    return(invisible(is.mle))
+    return(invisible(ans))
   } else {
-    return(is.mle)
+    return(ans)
   }
 }

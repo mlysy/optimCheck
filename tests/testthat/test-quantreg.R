@@ -23,8 +23,9 @@ test_that("quantreg::rq converges to local mode", {
     tau <- runif(1)
     M <- rq(y ~ . - 1, tau = tau, data = ds)
     beta.hat <- coef(M)
-    expect_true(all(optim_check(loglik = function(beta) {
+    ocheck <- optim_check(fun = function(beta) {
       -qr.obj(y = y, X = X, beta = beta, tau = tau)
-    }, theta.mle = beta.hat, plot = FALSE)))
+    }, theta = beta.hat, plot = FALSE)
+    expect_true(all(apply(ocheck$y, 2, max) <= ocheck$value))
   })
 })

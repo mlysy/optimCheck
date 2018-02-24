@@ -2,15 +2,15 @@
 % Please edit documentation in R/optim_check.R
 \name{optim_check}
 \alias{optim_check}
-\title{Numerical check for MLE.}
+\title{Check solution of an optimization routine.}
 \usage{
-optim_check(loglik, theta.mle, itheta, theta.names, theta.rng, refit = TRUE,
-  layout, plot = TRUE)
+optim_check(theta, fun, itheta, theta.names, theta.rng, refit = TRUE, layout,
+  plot = TRUE)
 }
 \arguments{
-\item{loglik}{loglikelihood function.  Takes a single vector argument.}
+\item{theta}{Value of potential solution vector.}
 
-\item{theta.mle}{The potential MLE.}
+\item{fun}{Objective function to be maximized (or minimized), with first argument the parameter vector over which optimization is to take place.  Should return a scalar result.}
 
 \item{itheta}{indices of one dimensional functions to evaluate and plot.  Defaults to all parameters.}
 
@@ -25,7 +25,14 @@ optim_check(loglik, theta.mle, itheta, theta.names, theta.rng, refit = TRUE,
 \item{plot}{Logical, whether or not to plot the conditional likelihoods.  See Value for details.}
 }
 \value{
-A logical vector of length \code{p}, indicating whether or not the MLE was the maximum of the plotted points along each coordinate.  This is for numerically checking what the plots otherwise do visually.
+An object of class \code{optimCheck} consisting of the elements:
+\describe{
+  \item{\code{theta}}{The potential solution.}
+  \item{\code{value}}{The value of \code{fun(theta)}.}
+  \item{\code{x}}{An \code{npts x ntheta} matrix where each column is the \code{x}-axis of the projection plot along the given component of \code{theta}.}
+  \item{\code{y}}{An \code{npts x ntheta} matrix where each column is the \code{y}-axis of the corresponding projection plot.}
+}
+The object is returned invisibly if \code{plot = TRUE}.
 }
 \description{
 Given a log-likelihood function and a potential MLE, checks whether each one-dimensional version of the log-likelihood which varies one parameter at a time with all others at the MLE is indeed maximized at the MLE value.
