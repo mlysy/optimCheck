@@ -4,25 +4,16 @@
 \alias{optim_check}
 \title{Check solution of an optimization routine.}
 \usage{
-optim_check(theta, fun, itheta, theta.names, theta.rng, refit = TRUE, layout,
-  plot = TRUE)
+optim_check(theta, fun, theta.rng = 0.1, refit = TRUE)
 }
 \arguments{
-\item{theta}{Value of potential solution vector.}
+\item{theta}{Potential solution vector of length \code{ntheta}.}
 
-\item{fun}{Objective function to be maximized (or minimized), with first argument the parameter vector over which optimization is to take place.  Should return a scalar result.}
+\item{fun}{Objective function to be maximized (or minimized), with first argument the length-\code{ntheta} parameter vector over which optimization is to take place.  Should return a scalar result.}
 
-\item{itheta}{indices of one dimensional functions to evaluate and plot.  Defaults to all parameters.}
+\item{theta.rng}{Optional specification of the range of each projection plot.  Can be: (i) a \code{2 x ntheta} matrix giving the endpoints of the range, (ii) a scalar or vector of length \code{ntheta}, such that the range in each plot is \code{theta +/- theta.range * abs(theta)}.}
 
-\item{theta.names}{Optional vector of parameter names for plotting.}
-
-\item{theta.rng}{Optional two-row matrix giving the plotting limits for each parameter.  Defaults to theta.mle +/- .5 * abs(theta.mle)}
-
-\item{refit}{If \code{TRUE}, recalculates the range so that drop is more or less the same on either side of \code{theta.mle}.}
-
-\item{layout}{Optional vector giving the number of rows and columns in the plot.  For \code{p} parameters, defaults to \code{c(nr, nc)}, where \code{nr = floor(p)} and \code{nc = ceiling(p/nr)}.}
-
-\item{plot}{Logical, whether or not to plot the conditional likelihoods.  See Value for details.}
+\item{refit}{If \code{TRUE}, narrows the range of each plot so that the y-value in each plot is more or less the same at either endpoint.}
 }
 \value{
 An object of class \code{optimCheck} consisting of the elements:
@@ -32,8 +23,7 @@ An object of class \code{optimCheck} consisting of the elements:
   \item{\code{x}}{An \code{npts x ntheta} matrix where each column is the \code{x}-axis of the projection plot along the given component of \code{theta}.}
   \item{\code{y}}{An \code{npts x ntheta} matrix where each column is the \code{y}-axis of the corresponding projection plot.}
 }
-The object is returned invisibly if \code{plot = TRUE}.
 }
 \description{
-Given a log-likelihood function and a potential MLE, checks whether each one-dimensional version of the log-likelihood which varies one parameter at a time with all others at the MLE is indeed maximized at the MLE value.
+Given the objective function of an optimization problem and a potential solution, calculates "projection plots" along each coordinate of the solution vector, with all other coordinates being fixed at the input values.
 }

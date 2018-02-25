@@ -95,9 +95,12 @@ theta.names <- function(d, G) {
 }
 
 
-ocheck <- optim_check(fun = loglik, theta = theta.mle,
-                      theta.names = parse(text = theta.names(d, G)),
-                      plot = TRUE)
+system.time({
+  ocheck <- optim_check(fun = loglik, theta = theta.mle)
+})
+
+plot(ocheck, theta.names = parse(text = theta.names(d, G)),
+     itheta = (G-1) + 1:(G*d))
 
 # absolute error
 aerr <- ocheck$value - apply(ocheck$y, 2, max)
