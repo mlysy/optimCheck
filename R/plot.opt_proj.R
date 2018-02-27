@@ -4,9 +4,10 @@
 #' @param theta.names Optional vector of parameter names for plotting.
 #' @param itheta indices of one dimensional functions to evaluate and plot.  Defaults to all parameters.
 #' @param layout Optional vector giving the number of rows and columns in the plot.  For \code{ntheta} parameters, defaults to \code{c(nr, nc)}, where \code{nr = floor(ntheta)} and \code{nc = ceiling(ntheta/nr)}.
+#' @param xlab,ylab x-axis and y-axis labels.
 #' @return A grid of projection plots, with vertical lines at the potential solution.
 #' @export
-plot.optimCheck <- function(x, theta.names, itheta, layout) {
+plot.opt_proj <- function(x, theta.names, itheta, layout, xlab, ylab) {
   theta.sol <- x$theta
   ntheta <- length(theta.sol)
   xout <- x$x
@@ -39,8 +40,8 @@ plot.optimCheck <- function(x, theta.names, itheta, layout) {
     abline(v = theta.sol[ith], col = "red")
   }
   # labels in margin
-  mtext(side = 2, text = "Objective Function",
-        line = 1, outer = TRUE)
-  mtext(side = 1, text = "Parameter",
-        line = 1, outer = TRUE)
+  if(missing(xlab)) xlab <- "Parameter"
+  if(missing(ylab)) ylab <- "Objective Function"
+  mtext(side = 2, text = ylab, line = 1, outer = TRUE)
+  mtext(side = 1, text = xlab, line = 1, outer = TRUE)
 }

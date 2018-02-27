@@ -121,10 +121,11 @@ aerr <- ocheck$value - apply(ocheck$y, 2, max)
 # 2.  opt: theta,value (optimal value)
 # 3.  diff: theta,value (difference from potential solution)
 
-summary.optimCheck <- function(object, maximum = TRUE, theta.names) {
+summary.opt_proj <- function(object, theta.names) {
   theta <- object$theta
   value <- object$value
   ntheta <- length(theta)
+  maximum <- object$maximize
   opt.fun <- if(maximum) max else min
   which.opt <- if(maximum) which.max else which.min
   if(missing(theta.names)) {
@@ -157,8 +158,8 @@ summary.optimCheck <- function(object, maximum = TRUE, theta.names) {
 }
 
 
-print.summary.optimCheck <- function(x,
-                                     digits = max(3L, getOption("digits")-3L)) {
+print.summary.opt_proj <- function(x,
+                                   digits = max(3L, getOption("digits")-3L)) {
   res <- cbind(x$theta, x$diff["theta",], x$reldiff["theta",])
   colnames(res) <- c("sol", "D=opt-sol", "R=D/|sol|")
   print(signif(res, digits = digits))

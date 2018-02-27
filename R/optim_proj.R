@@ -1,21 +1,24 @@
-#' Check solution of an optimization routine.
+#' Calculates projection plots for a given objective function.
 #'
 #' Given the objective function of an optimization problem and a potential solution, calculates "projection plots" along each coordinate of the solution vector, with all other coordinates being fixed at the input values.
 #'
 #' @param theta Potential solution vector of length \code{ntheta}.
 #' @param fun Objective function to be maximized (or minimized), with first argument the length-\code{ntheta} parameter vector over which optimization is to take place.  Should return a scalar result.
+#' @param maximize Logical, whether a maximum or a minimum of the objective function is sought.
 #' @param theta.rng Optional specification of the range of each projection plot.  Can be: (i) a \code{2 x ntheta} matrix giving the endpoints of the range, (ii) a scalar or vector of length \code{ntheta}, such that the range in each plot is \code{theta +/- theta.range * abs(theta)}.
 #' @param npts Number of points in each projection plot.
-#' @param refit If \code{TRUE}, narrows the range of each plot so that the y-value in each plot is more or less the same at either endpoint.
+#' @param equalize If \code{TRUE}, narrows the range of each plot so that the y-value in each plot is more or less the same at either endpoint.
 #' @return An object of class \code{optimCheck} consisting of the elements:
 #' \describe{
 #'   \item{\code{theta}}{The potential solution.}
 #'   \item{\code{value}}{The value of \code{fun(theta)}.}
+#'   \item{\code{maximize}}{Logical; whether the potential solution should maximize or minimize the objective function.}
 #'   \item{\code{x}}{An \code{npts x ntheta} matrix where each column is the \code{x}-axis of the projection plot along the given component of \code{theta}.}
 #'   \item{\code{y}}{An \code{npts x ntheta} matrix where each column is the \code{y}-axis of the corresponding projection plot.}
 #' }
 #' @export
-optim_check <- function(theta, fun, theta.rng = .1, npts = 100, refit = TRUE) {
+optim_proj <- function(theta, fun, maximize = TRUE, theta.rng = .1,
+                       npts = 100, equalize = TRUE) {
   theta.sol <- theta
   ntheta <- length(theta.sol) # number of parameters
   xout <- matrix(NA, npts, ntheta) # x-axis of plots
@@ -67,7 +70,8 @@ optim_check <- function(theta, fun, theta.rng = .1, npts = 100, refit = TRUE) {
         theta[ith] <- thetai
         fun(theta)
       })
-      if(jj == 1 && refit) {
+      if(!maximize) theta.ll <- -theta.ll
+      if(jj == 1 && equalize) {
         vth <- !is.na(theta.ll) & theta.ll > -Inf # valid values
         lth <- theta.seq < theta.sol[ith] # on the left of mle
         rth <- theta.seq > theta.sol[ith] # on the right
@@ -79,6 +83,7 @@ optim_check <- function(theta, fun, theta.rng = .1, npts = 100, refit = TRUE) {
         theta.seq <- seq(theta.seq[ibd[1]], theta.seq[ibd[2]], len = npts)
       } else break
     }
+    if(!maximize) theta.ll <- -theta.ll
     # store calcs
     xout[,ith] <- theta.seq
     yout[,ith] <- theta.ll
@@ -92,8 +97,9 @@ optim_check <- function(theta, fun, theta.rng = .1, npts = 100, refit = TRUE) {
     ##   abline(v = theta.sol[ith], col = "red")
     ## }
   }
-  ans <- list(theta = theta.sol, value = ll.max, x = xout, y = yout)
-  class(ans) <- "optimCheck"
+  ans <- list(theta = theta.sol, value = ll.max, maximize = maximize,
+              x = xout, y = yout)
+  class(ans) <- "opt_proj"
   ans
   ## if(plot) {
   ##   plot.optimCheck
