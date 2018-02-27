@@ -5,6 +5,7 @@
 #' @param theta Potential solution vector of length \code{ntheta}.
 #' @param fun Objective function to be maximized (or minimized), with first argument the length-\code{ntheta} parameter vector over which optimization is to take place.  Should return a scalar result.
 #' @param theta.rng Optional specification of the range of each projection plot.  Can be: (i) a \code{2 x ntheta} matrix giving the endpoints of the range, (ii) a scalar or vector of length \code{ntheta}, such that the range in each plot is \code{theta +/- theta.range * abs(theta)}.
+#' @param npts Number of points in each projection plot.
 #' @param refit If \code{TRUE}, narrows the range of each plot so that the y-value in each plot is more or less the same at either endpoint.
 #' @return An object of class \code{optimCheck} consisting of the elements:
 #' \describe{
@@ -14,10 +15,9 @@
 #'   \item{\code{y}}{An \code{npts x ntheta} matrix where each column is the \code{y}-axis of the corresponding projection plot.}
 #' }
 #' @export
-optim_check <- function(theta, fun, theta.rng = .1, refit = TRUE) {
+optim_check <- function(theta, fun, theta.rng = .1, npts = 100, refit = TRUE) {
   theta.sol <- theta
   ntheta <- length(theta.sol) # number of parameters
-  npts <- 200 # number of points to plot
   xout <- matrix(NA, npts, ntheta) # x-axis of plots
   yout <- matrix(NA, npts, ntheta) # y-axis of plots
   ll.max <- fun(theta.sol) # maximum value

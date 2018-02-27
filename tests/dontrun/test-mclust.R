@@ -72,7 +72,7 @@ loglik <- function(theta) {
   parameters <- theta2par(theta, d, G)
   # simplex-valued probabilities
   if(any(parameters$pro < 0)) return(-Inf) # always sums to 1
-  # positive-definite variance matrices
+  ## # positive-definite variance matrices
   if(any(apply(parameters$variance$cholsigma, 3, diag) <= 0)) return(-Inf)
   sum(dens("VVV", data = y[,-1],
            parameters = parameters, logarithm = TRUE))
@@ -96,11 +96,73 @@ theta.names <- function(d, G) {
 
 
 system.time({
-  ocheck <- optim_check(fun = loglik, theta = theta.mle)
+  ocheck <- optim_check(fun = loglik, theta = theta.mle,
+                        npts = 50, refit = FALSE)
 })
+
+# ok what about just optim run on solution?
+ocheck2 <- optim(par = theta.mle, fn = loglik,
+                 control = list(fnscale = -1, maxit = 1e4))
 
 plot(ocheck, theta.names = parse(text = theta.names(d, G)),
      itheta = (G-1) + 1:(G*d))
 
 # absolute error
 aerr <- ocheck$value - apply(ocheck$y, 2, max)
+
+#--- ok a summary function -----------------------------------------------------
+
+# 1.  for each param, the value at which projection max/min is reached
+# 2.  the value of projection max/min
+# 3.  abs/rel err?
+
+# ok what about:
+# 1.  theta, value
+# 2.  opt: theta,value (optimal value)
+# 3.  diff: theta,value (difference from potential solution)
+
+summary.optimCheck <- function(object, maximum = TRUE, theta.names) {
+  theta <- object$theta
+  value <- object$value
+  ntheta <- length(theta)
+  opt.fun <- if(maximum) max else min
+  which.opt <- if(maximum) which.max else which.min
+  if(missing(theta.names)) {
+    theta.names <- paste0("theta",1:ntheta)
+    # converts to expression so symbol "theta_i" is plotted
+    ## theta.names <- parse(text = theta.names)
+  }
+  opt.res <- matrix(NA, 2, ntheta)
+  for(ii in 1:ntheta) {
+    iopt <- which.opt(object$y[,ii])
+    opt.res[,ii] <- c(object$x[iopt,ii], object$y[iopt,ii])
+  }
+  diff.res <- rbind(theta = opt.res[1,] - theta,
+                    value = opt.res[2,] - value)
+  rel.res <- rbind(theta = diff.res[1,]/abs(theta),
+                   value = diff.res[2,]/abs(value))
+  # name things
+  names(theta) <- theta.names
+  rnames <- c("theta", "value")
+  rownames(opt.res) <- rnames
+  rownames(diff.res) <- rnames
+  rownames(rel.res) <- rnames
+  colnames(opt.res) <- theta.names
+  colnames(diff.res) <- theta.names
+  colnames(rel.res) <- theta.names
+  ans <- list(theta = theta, value = value,
+              opt = opt.res, diff = diff.res, reldiff = rel.res)
+  class(ans) <- "summary.optimCheck"
+  ans
+}
+
+
+print.summary.optimCheck <- function(x,
+                                     digits = max(3L, getOption("digits")-3L)) {
+  res <- cbind(x$theta, x$diff["theta",], x$reldiff["theta",])
+  colnames(res) <- c("sol", "D=opt-sol", "R=D/|sol|")
+  print(signif(res, digits = digits))
+}
+
+
+printCoefmat(tmp, digits = 3L, cs.ind = 3, tst.ind = 1:2, has.Pvalue = FALSE)

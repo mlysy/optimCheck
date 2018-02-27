@@ -4,7 +4,7 @@
 \alias{optim_check}
 \title{Check solution of an optimization routine.}
 \usage{
-optim_check(theta, fun, theta.rng = 0.1, refit = TRUE)
+optim_check(theta, fun, theta.rng = 0.1, npts = 100, refit = TRUE)
 }
 \arguments{
 \item{theta}{Potential solution vector of length \code{ntheta}.}
@@ -12,6 +12,8 @@ optim_check(theta, fun, theta.rng = 0.1, refit = TRUE)
 \item{fun}{Objective function to be maximized (or minimized), with first argument the length-\code{ntheta} parameter vector over which optimization is to take place.  Should return a scalar result.}
 
 \item{theta.rng}{Optional specification of the range of each projection plot.  Can be: (i) a \code{2 x ntheta} matrix giving the endpoints of the range, (ii) a scalar or vector of length \code{ntheta}, such that the range in each plot is \code{theta +/- theta.range * abs(theta)}.}
+
+\item{npts}{Number of points in each projection plot.}
 
 \item{refit}{If \code{TRUE}, narrows the range of each plot so that the y-value in each plot is more or less the same at either endpoint.}
 }
