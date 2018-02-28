@@ -19,15 +19,15 @@ x.mle <- solve(A, b)
 fit <- optim(par = x.mle * 1.1, fn = loglik,
              control = list(maxit = 1e5,
                             fnscale = -1,
-                            parscale = abs(x.hat)))
+                            parscale = abs(x.mle)))
 fit$convergence
 x.hat <- fit$par
 
-plot(optim_check(theta = x.hat, fun = loglik, theta.rng = .1))
+plot(optim_proj(xsol = x.hat, fun = loglik, xrng = .1))
 
 
 fit$par - mu
 
 fit2 <- optim(par = fit$par, fn = loglik, control = list(maxit = 1e5))
 
-plot(optim_check(theta = fit$par, fun = loglik, theta.rng = .1))
+plot(optim_proj(theta = fit$par, fun = loglik, theta.rng = .1))

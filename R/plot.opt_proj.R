@@ -1,43 +1,43 @@
 #' Projection plots for optimization routines.
 #'
-#' @param x An \code{optimCheck} object, i.e., output from function \code{\link{optim_check}}.
-#' @param theta.names Optional vector of parameter names for plotting.
-#' @param itheta indices of one dimensional functions to evaluate and plot.  Defaults to all parameters.
-#' @param layout Optional vector giving the number of rows and columns in the plot.  For \code{ntheta} parameters, defaults to \code{c(nr, nc)}, where \code{nr = floor(ntheta)} and \code{nc = ceiling(ntheta/nr)}.
-#' @param xlab,ylab x-axis and y-axis labels.
+#' @param x An \code{opt_proj} object, i.e., output from function \code{\link{optim_proj}}.
+#' @param xnames Optional vector of element names of potential solution for plot titles.
+#' @param xind Integer or logical vector of indices indicating which projections should be plotted.  Defaults to all projection plots.
+#' @param layout Optional vector giving the number of rows and columns in the plot layout.  For \code{nx} plots, defaults to \code{c(nr, nc)}, where \code{nr = floor(nx)} and \code{nc = ceiling(nx/nr)}.
+#' @param xlab,ylab Outer x-axis and y-axis labels.
 #' @return A grid of projection plots, with vertical lines at the potential solution.
 #' @export
-plot.opt_proj <- function(x, theta.names, itheta, layout, xlab, ylab) {
-  theta.sol <- x$theta
-  ntheta <- length(theta.sol)
-  xout <- x$x
-  yout <- x$y
+plot.opt_proj <- function(x, xnames, xind, layout, xlab, ylab) {
+  xsol <- x$xsol
+  nx <- length(xsol)
+  xout <- x$xproj
+  yout <- x$yproj
   # which projections to plot
-  if(missing(itheta)) itheta <- 1:ntheta
-  if(is.logical(itheta)) itheta <- which(itheta) # convert T/F's to indices
-  ntheta2 <- length(itheta)
+  if(missing(xind)) xind <- 1:nx
+  if(is.logical(xind)) xind <- which(xind) # convert T/F's to indices
+  nx2 <- length(xind)
   # plot titles
-  if(missing(theta.names)) {
-    theta.names <- paste0("theta[",1:ntheta,"]")
+  if(missing(xnames)) {
+    xnames <- paste0("x[",1:nx,"]")
     # converts to expression so symbol "theta_i" is plotted
-    theta.names <- parse(text = theta.names)
+    xnames <- parse(text = xnames)
   }
   # set up plot region
   opar <- par(no.readonly = TRUE) # save specs of current plot
   on.exit(par(opar)) # restore plot parameters when exiting function
   # plot size
   if(missing(layout)) {
-    layout <- floor(sqrt(ntheta2))
-    layout <- c(layout, ceiling(ntheta2/layout))
+    layout <- floor(sqrt(nx2))
+    layout <- c(layout, ceiling(nx2/layout))
   }
   par(mfrow = layout, mar = c(2,2.5,2.5,0), oma = c(3, 3, .5, .5))
   # plot itself
-  for(ii in 1:ntheta2) {
-    ith <- itheta[ii]
-    plot(xout[,ith], yout[,ith], type = "l",
+  for(ii in 1:nx2) {
+    ix <- xind[ii]
+    plot(xout[,ix], yout[,ix], type = "l",
          xlab = "", ylab = "")
-    title(main = theta.names[ith], cex.main = 2)
-    abline(v = theta.sol[ith], col = "red")
+    title(main = xnames[ix], cex.main = 2)
+    abline(v = xsol[ix], col = "red")
   }
   # labels in margin
   if(missing(xlab)) xlab <- "Parameter"

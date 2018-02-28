@@ -4,30 +4,30 @@
 \alias{optim_proj}
 \title{Calculates projection plots for a given objective function.}
 \usage{
-optim_proj(theta, fun, maximize = TRUE, theta.rng = 0.1, npts = 100,
+optim_proj(xsol, fun, maximize = TRUE, xrng = 0.1, npts = 100,
   equalize = TRUE)
 }
 \arguments{
-\item{theta}{Potential solution vector of length \code{ntheta}.}
+\item{xsol}{Potential solution vector of length \code{nx}.}
 
-\item{fun}{Objective function to be maximized (or minimized), with first argument the length-\code{ntheta} parameter vector over which optimization is to take place.  Should return a scalar result.}
+\item{fun}{Objective function to be maximized (or minimized), with first argument the length-\code{nx} parameter vector over which optimization is to take place.  Should return a scalar result.}
 
 \item{maximize}{Logical, whether a maximum or a minimum of the objective function is sought.}
 
-\item{theta.rng}{Optional specification of the range of each projection plot.  Can be: (i) a \code{2 x ntheta} matrix giving the endpoints of the range, (ii) a scalar or vector of length \code{ntheta}, such that the range in each plot is \code{theta +/- theta.range * abs(theta)}.}
+\item{xrng}{Optional specification of the range of each projection plot.  Can be: (i) a \code{2 x nx} matrix giving the endpoints of the range, (ii) a scalar or vector of length \code{nx}, such that the range in each plot is \code{theta +/- xrange * abs(theta)}.}
 
 \item{npts}{Number of points in each projection plot.}
 
-\item{equalize}{If \code{TRUE}, narrows the range of each plot so that the y-value in each plot is more or less the same at either endpoint.}
+\item{equalize}{If \code{TRUE}, refits the projection plots to a narrowed range such that the y-value in each plot is more or less the same at either endpoint.}
 }
 \value{
-An object of class \code{optimCheck} consisting of the elements:
+An object of class \code{opt_proj} consisting of the elements:
 \describe{
-  \item{\code{theta}}{The potential solution.}
-  \item{\code{value}}{The value of \code{fun(theta)}.}
+  \item{\code{xsol}}{The potential solution.}
+  \item{\code{ysol}}{The value of \code{fun(xsol)}.}
   \item{\code{maximize}}{Logical; whether the potential solution should maximize or minimize the objective function.}
-  \item{\code{x}}{An \code{npts x ntheta} matrix where each column is the \code{x}-axis of the projection plot along the given component of \code{theta}.}
-  \item{\code{y}}{An \code{npts x ntheta} matrix where each column is the \code{y}-axis of the corresponding projection plot.}
+  \item{\code{xproj}}{An \code{npts x nx} matrix where each column is the \code{x}-axis of the projection plot along the given component of \code{theta}.}
+  \item{\code{yproj}}{An \code{npts x nx} matrix where each column is the \code{y}-axis of the corresponding projection plot.}
 }
 }
 \description{

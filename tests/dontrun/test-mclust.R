@@ -1,3 +1,5 @@
+#--- test mclust ---------------------------------------------------------------
+
 require(mclust)
 
 # simulate random vector(s) from dirichlet distribution
@@ -96,16 +98,16 @@ theta.names <- function(d, G) {
 
 
 system.time({
-  ocheck <- optim_check(fun = loglik, theta = theta.mle,
-                        npts = 50, refit = FALSE)
+  ocheck <- optim_proj(fun = loglik, xsol = theta.mle,
+                       npts = 50, equalize = FALSE)
 })
 
 # ok what about just optim run on solution?
 ocheck2 <- optim(par = theta.mle, fn = loglik,
                  control = list(fnscale = -1, maxit = 1e4))
 
-plot(ocheck, theta.names = parse(text = theta.names(d, G)),
-     itheta = (G-1) + 1:(G*d))
+plot(ocheck, xnames = parse(text = theta.names(d, G)),
+     xind = (G-1) + 1:(G*d))
 
 # absolute error
 aerr <- ocheck$value - apply(ocheck$y, 2, max)
