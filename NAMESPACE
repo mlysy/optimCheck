@@ -2,6 +2,10 @@
 
 S3method(plot,opt_proj)
 S3method(print,opt_proj)
+S3method(print,opt_refit)
 S3method(print,summary.opt_proj)
+S3method(print,summary.opt_refit)
 S3method(summary,opt_proj)
+S3method(summary,opt_refit)
 export(optim_proj)
+export(optim_refit)

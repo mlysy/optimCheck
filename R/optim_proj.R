@@ -7,7 +7,6 @@
 #' @param maximize Logical, whether a maximum or a minimum of the objective function is sought.
 #' @param xrng Optional specification of the range of each projection plot.  Can be: (i) a \code{2 x nx} matrix giving the endpoints of the range, (ii) a scalar or vector of length \code{nx}, such that the range in each plot is \code{theta +/- xrange * abs(theta)}.
 #' @param npts Number of points in each projection plot.
-#' @param equalize If \code{TRUE}, refits the projection plots to a narrowed range such that the y-value in each plot is more or less the same at either endpoint.
 #' @return An object of class \code{opt_proj} consisting of the elements:
 #' \describe{
 #'   \item{\code{xsol}}{The potential solution.}
@@ -18,10 +17,11 @@
 #' }
 #' @export
 optim_proj <- function(xsol, fun, maximize = TRUE, xrng = .1,
-                       npts = 100, equalize = TRUE) {
+                       npts = 100) {
   nx <- length(xsol) # number of parameters
   xproj <- matrix(NA, npts, nx) # x-axis of plots
   yproj <- matrix(NA, npts, nx) # y-axis of plots
+  equalize <- FALSE # disabled
   if(!is.matrix(xrng)) {
     # default range is +/- .1 * max(abs(xsol))
     xrng <- xrng * abs(xsol)
@@ -43,15 +43,8 @@ optim_proj <- function(xsol, fun, maximize = TRUE, xrng = .1,
       })
       if(!maximize) yval <- -yval
       if(jj == 1 && equalize) {
-        vth <- !is.na(yval) & yval > -Inf # valid values
-        lth <- xseq < xsol[ii] # on the left of solution
-        rth <- xseq > xsol[ii] # on the right
-        # larger of the min value on each size
-        lbd <- max(min(yval[vth & lth]), min(yval[vth & rth]))
-        # rescale xseq to be on this range
-        ibd <- c(which.min(ifelse(vth & lth, abs(yval-lbd), Inf)),
-                 which.min(ifelse(vth & rth, abs(yval-lbd), Inf)))
-        xseq <- seq(xseq[ibd[1]], xseq[ibd[2]], len = npts)
+        xseq <- .equalize_xlim(xseq, yval, xsol[ii])
+        xseq <- seq(xseq[1], xseq[2], len = npts)
       } else break
     }
     if(!maximize) yval <- -yval
@@ -64,4 +57,3 @@ optim_proj <- function(xsol, fun, maximize = TRUE, xrng = .1,
   class(ans) <- "opt_proj"
   ans
 }
-

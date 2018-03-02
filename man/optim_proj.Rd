@@ -4,8 +4,7 @@
 \alias{optim_proj}
 \title{Calculates projection plots for a given objective function.}
 \usage{
-optim_proj(xsol, fun, maximize = TRUE, xrng = 0.1, npts = 100,
-  equalize = TRUE)
+optim_proj(xsol, fun, maximize = TRUE, xrng = 0.1, npts = 100)
 }
 \arguments{
 \item{xsol}{Potential solution vector of length \code{nx}.}
@@ -17,8 +16,6 @@ optim_proj(xsol, fun, maximize = TRUE, xrng = 0.1, npts = 100,
 \item{xrng}{Optional specification of the range of each projection plot.  Can be: (i) a \code{2 x nx} matrix giving the endpoints of the range, (ii) a scalar or vector of length \code{nx}, such that the range in each plot is \code{theta +/- xrange * abs(theta)}.}
 
 \item{npts}{Number of points in each projection plot.}
-
-\item{equalize}{If \code{TRUE}, refits the projection plots to a narrowed range such that the y-value in each plot is more or less the same at either endpoint.}
 }
 \value{
 An object of class \code{opt_proj} consisting of the elements:

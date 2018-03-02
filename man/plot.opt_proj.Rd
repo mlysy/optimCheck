@@ -4,7 +4,7 @@
 \alias{plot.opt_proj}
 \title{Projection plots for optimization routines.}
 \usage{
-\method{plot}{opt_proj}(x, xnames, xind, layout, xlab, ylab)
+\method{plot}{opt_proj}(x, xnames, xind, equalize = TRUE, layout, xlab, ylab)
 }
 \arguments{
 \item{x}{An \code{opt_proj} object, i.e., output from function \code{\link{optim_proj}}.}
@@ -12,6 +12,8 @@
 \item{xnames}{Optional vector of element names of potential solution for plot titles.}
 
 \item{xind}{Integer or logical vector of indices indicating which projections should be plotted.  Defaults to all projection plots.}
+
+\item{equalize}{If \code{TRUE}, narrows the range in each projection plot such that the y-value is more or less the same at either endpoint.}
 
 \item{layout}{Optional vector giving the number of rows and columns in the plot layout.  For \code{nx} plots, defaults to \code{c(nr, nc)}, where \code{nr = floor(nx)} and \code{nc = ceiling(nx/nr)}.}
 

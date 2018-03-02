@@ -33,4 +33,5 @@ optim_refit <- function(xsol, fun, maximize = TRUE,
               maximize = maximize,
               xopt = ans$par, yopt = ans$value)
   class(ans) <- "opt_refit"
+  ans
 }

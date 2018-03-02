@@ -24,15 +24,16 @@
 A list with elements:
 \describe{
   \item{\code{xsol}}{The potential solution vector.}
-  \item{\code{ysol}}{The value of the objective function at \code{x}.}
-  \item{\code{opt}}{A two-row matrix of optimal values of the projection plots.  The first row corresponds to the maxizing/minimizing value of \code{x_i}, and the second is the value of the maximum/minimum itself.}
-  \item{\code{diff}}{A two-row matrix of differences between the potential solution and the optimal value.  The first row corresponds to differences in each element of theta, and the second to differences in the objective function.}
-  \item{\code{rel}}{A two-row matrix of relative differences between the potential solution and the optimal value (the denominator being the potential solution).  The first row corresponds to relative differences in each element of theta, and the second to relative differences in the objective function.}
+  \item{\code{ysol}}{The value of the objective function at \code{xsol}.}
+  \item{\code{xopt}}{A vector containing the argmax/argmin in each projection plot.}
+  \item{\code{yopt}}{A vector containing the max/min in each projection plot.}
+  \item{\code{xdiff}}{A two-row matrix containing the differences between \code{xsol} and \code{xopt}.  The first row is the absolute difference \code{D = xopt - xsol}, the second is the relative difference \code{R = D/|xsol|}.}
+  \item{\code{ydiff}}{Same thing, but between \code{ysol} and \code{yopt}.}
 }
 }
 \description{
 \code{summary} method for projection plots.
 }
 \details{
-The \code{print} methods for the summary and \code{opt_proj} objects themselves both return a three-column matrix, consisting of the potential solution, the optimal solution in each projection plot, and the relative difference between the two.
+The \code{print} methods for the summary and \code{opt_proj} objects themselves both return a three-column matrix, consisting of the potential solution (\code{xsol}), the optimal solution in each projection plot (\code{xopt}), and the relative difference between the two (\code{R = (xopt - xsol)/|xsol|}).
 }

@@ -61,10 +61,8 @@ all.equal(parameters, theta2par(par2theta(parameters), d, G))
 
 # simulate data
 y <- simVVV(parameters, n = n)
-
 # fit model
 fit <- emVVV(data = y[,-1], parameters = parameters)
-
 # convert parameters to MLE
 par.mle <- fit$parameters
 par.mle$variance$cholsigma <- array(apply(par.mle$variance$sigma, 3, chol),
@@ -98,8 +96,13 @@ theta.names <- function(d, G) {
 
 
 system.time({
-  ocheck <- optim_proj(fun = loglik, xsol = theta.mle,
-                       npts = 50, equalize = FALSE)
+  ocheck <- optim_proj(fun = loglik, xsol = theta.mle, npts = 100)
+})
+
+plot(ocheck, equalize = TRUE)
+
+system.time({
+  ocheck2 <- optim_refit(xsol = theta.mle, fun = loglik, reltol = 5e-8)
 })
 
 # ok what about just optim run on solution?
