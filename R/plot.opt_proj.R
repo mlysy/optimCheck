@@ -32,7 +32,7 @@ plot.opt_proj <- function(x, xnames, xind, equalize = TRUE,
     layout <- floor(sqrt(nx2))
     layout <- c(layout, ceiling(nx2/layout))
   }
-  par(mfrow = layout, mar = c(2,2.5,2.5,0), oma = c(3, 3, .5, .5))
+  par(mfrow = layout, mar = c(2,2.5,2,0), oma = c(2.5, 2.5, .5, 1))
   # plot itself
   for(ii in 1:nx2) {
     ix <- xind[ii]
@@ -44,15 +44,15 @@ plot.opt_proj <- function(x, xnames, xind, equalize = TRUE,
       xlim <- range(xout[,ix])
       ylim <- range(yout[,ix])
     }
-    plot(xout[,ix], yout[,ix], type = "l",
+    plot(xout[,ix], yout[,ix], type = "l", main = xnames[ix],
          xlim = xlim, ylim = ylim, xlab = "", ylab = "")
-    title(main = xnames[ix], cex.main = 2)
+    ## title(main = xnames[ix], cex.main = 2)
     abline(v = xsol[ix], col = "red")
   }
   # labels in margin
   if(missing(xlab)) xlab <- "Parameter"
   if(missing(ylab)) ylab <- "Objective Function"
-  mtext(side = 2, text = ylab, line = 1, outer = TRUE)
+  mtext(side = 2, text = ylab, line = .5, outer = TRUE)
   mtext(side = 1, text = xlab, line = 1, outer = TRUE)
 }
 

@@ -84,7 +84,7 @@ loglik(theta.mle)
 theta.names <- function(d, G) {
   rho <- paste0("rho[", 1:(G-1), "]")
   ind <- as.matrix(expand.grid(d = 1:d, G = 1:G))
-  mu <- paste0("mu[", ind[,"d"], ind[,"G"], "]")
+  mu <- paste0("mu[", ind[,"d"], "]^(", ind[,"G"], ")")
   idd <- as.matrix(expand.grid(d1 = 1:d, d2 = 1:d))
   ind2 <- as.matrix(expand.grid(dd = which(upper.tri(diag(d), diag = TRUE)),
                                 G = 1:G))
@@ -99,7 +99,7 @@ system.time({
   ocheck <- optim_proj(fun = loglik, xsol = theta.mle, npts = 100)
 })
 
-plot(ocheck, equalize = TRUE)
+plot(ocheck, xnames = parse(text = theta.names(d, G)), equalize = TRUE)
 
 system.time({
   ocheck2 <- optim_refit(xsol = theta.mle, fun = loglik, reltol = 5e-8)
