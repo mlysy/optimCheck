@@ -26,10 +26,8 @@ test_that("quantreg::rq converges to local mode", {
     ocheck <- optim_proj(fun = function(beta) {
       qr.obj(y = y, X = X, beta = beta, tau = tau)
     }, xsol = beta.hat, maximize = FALSE)
-    # minimum of relative and absolute error
-    err <- summary(ocheck)$xdiff
-    err <- max(pmin(abs(err[,"abs"]), abs(err[,"rel"])))
-    expect_lt(err, .01)
-    ## expect_true(all(apply(ocheck$yproj, 2, max) >= ocheck$ysol))
+    # minimum of relative and absolute difference between xsol and xopt
+    xerr <- diff(ocheck)
+    expect_lt(max(xerr), .01)
   })
 })

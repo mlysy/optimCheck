@@ -41,10 +41,9 @@ test_that("mclust::emEEE converges to local mode.", {
     ocheck <- optim_proj(fun = function(theta) {
       loglik(theta, d, G, y[,-1])
     }, xsol = theta.mle, xrng = .1, npts = 50)
-    # minimum of relative and absolute error
-    err <- summary(ocheck)$xdiff
-    err <- max(pmin(abs(err[,"abs"]), abs(err[,"rel"])))
-    expect_lt(err, .01)
+    # minimum of relative and absolute difference between xsol and xopt
+    xerr <- diff(ocheck)
+    expect_lt(max(xerr), .01)
   })
 })
 

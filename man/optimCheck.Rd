@@ -34,7 +34,7 @@ system.time({
   oproj <- optim_proj(xsol = bhat,
                       fun = function(beta) loglik(beta, y, X))
 })
-oproj # see ?summary.optcheck for more information
+oproj # see ?summary.optproj for more information
 
 # plot itself: see ?plot.optproj
 bnames <- parse(text = paste0("beta[", 1:p, "]"))
