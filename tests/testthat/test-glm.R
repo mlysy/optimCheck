@@ -17,11 +17,10 @@ test_that("glm/logistic converges according to optim_proj.", {
     p <- sample(2:10,1)
     X <- matrix(rnorm(n*p),n,p)
     beta0 <- rnorm(p, sd = .1)
-    eta0 <- c(X %*% beta0)
     # response
-    y <- rbinom(n, size = 1, prob = binomial()$linkinv(eta0))
+    y <- rbinom(n, size = 1, prob = binomial()$linkinv(X %*% beta0))
     # fit glm
-    beta.hat <- coef(glm(y ~ X - 1, family = "binomial"))
+    beta.hat <- coef(glm(y ~ X - 1, family = binomial))
     # check with optim_proj
     ocheck <- optim_proj(fun = function(beta) loglik(beta, y, X),
                          xsol = beta.hat)
@@ -39,11 +38,10 @@ test_that("glm/logistic converges according to optim_refit.", {
     p <- sample(2:10,1)
     X <- matrix(rnorm(n*p),n,p)
     beta0 <- rnorm(p, sd = .1)
-    eta0 <- c(X %*% beta0)
     # response
-    y <- rbinom(n, size = 1, prob = binomial()$linkinv(eta0))
+    y <- rbinom(n, size = 1, prob = binomial()$linkinv(X %*% beta0))
     # fit glm
-    beta.hat <- coef(glm(y ~ X - 1, family = "binomial"))
+    beta.hat <- coef(glm(y ~ X - 1, family = binomial))
     # check with optim_proj
     ocheck <- optim_refit(fun = function(beta) loglik(beta, y, X),
                           xsol = beta.hat)

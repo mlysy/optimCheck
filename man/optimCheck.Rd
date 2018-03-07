@@ -8,3 +8,44 @@
 \description{
 Graphical and numerical checks for mode-finding routines.
 }
+\examples{
+# example: logistic regression
+ilogit <- binomial()$linkinv
+
+# generate data
+p <- sample(2:10,1) # number of parameters
+n <- sample(1000:2000,1) # number of observations
+X <- matrix(rnorm(n*p),n,p) # design matrix
+beta0 <- rnorm(p, sd = .1) # true parameter values
+y <- rbinom(n, size = 1, prob = ilogit(X \%*\% beta0)) # response
+
+# fit logistic regression
+bhat <- coef(glm(y ~ X - 1, family = binomial))
+
+# check convergence
+
+# likelihood function
+loglik <- function(beta, y, X) {
+  sum(dbinom(y, size = 1, prob = ilogit(X \%*\% beta), log = TRUE))
+}
+
+# projection plots
+system.time({
+  oproj <- optim_proj(xsol = bhat,
+                      fun = function(beta) loglik(beta, y, X))
+})
+oproj # see ?summary.opt_proj for more information
+
+# plot itself: see ?plot.opt_proj
+bnames <- parse(text = paste0("beta[", 1:p, "]"))
+plot(oproj, xnames = bnames,
+     xlab = "Coefficient", ylab = "Loglikelihood")
+
+# refit general purpose optimizer starting from bhat
+# often faster than optim_proj, but less stable
+system.time({
+  orefit <- optim_refit(xsol = bhat,
+                        fun = function(beta) loglik(beta, y, X))
+})
+orefit
+}
