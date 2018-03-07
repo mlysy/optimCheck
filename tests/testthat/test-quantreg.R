@@ -29,7 +29,7 @@ test_that("quantreg::rq converges to local mode", {
     # minimum of relative and absolute error
     err <- summary(ocheck)$xdiff
     err <- max(pmin(abs(err[,"abs"]), abs(err[,"rel"])))
-    expect_less_than(err, .01) # check that its less than
+    expect_lt(err, .01)
     ## expect_true(all(apply(ocheck$yproj, 2, max) >= ocheck$ysol))
   })
 })

@@ -44,35 +44,7 @@ test_that("mclust::emEEE converges to local mode.", {
     # minimum of relative and absolute error
     err <- summary(ocheck)$xdiff
     err <- max(pmin(abs(err[,"abs"]), abs(err[,"rel"])))
-    expect_less_than(err, .01)
+    expect_lt(err, .01)
   })
 })
 
-## all.equal(parameters, theta2par(par2theta(parameters), d, G))
-## parameters2 <- theta2par(par2theta(parameters), d, G)
-## identical(parameters$pro, parameters2$pro)
-## range(parameters$mean - parameters2$mean)
-## range(parameters$variance$cholsigma - parameters2$variance$cholsigma)
-
-# simulate data
-
-
-## theta.mle <- par2theta(par.mle)
-## loglik(theta.mle)
-
-## system.time({
-##   ocheck <- optim_refit(xsol = theta.mle, fun = loglik, reltol = 1e-7)
-## })
-
-## err <- summary(ocheck)$xdiff
-## max(pmin(abs(err["abs",]), abs(err["rel",])))
-
-## system.time({
-##   ocheck <- optim_proj(fun = loglik, xsol = theta.mle, npts = 50, xrng = .5)
-## })
-
-## plot(ocheck, xnames = parse(text = theta.names(d, G)), equalize = FALSE)
-
-## system.time({
-##   ocheck2 <- optim_refit(xsol = theta.mle, fun = loglik, reltol = 5e-8)
-## })

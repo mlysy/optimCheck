@@ -27,8 +27,8 @@ A list with elements:
   \item{\code{ysol}}{The value of the objective function at \code{xsol}.}
   \item{\code{xopt}}{A vector containing the argmax/argmin in each projection plot.}
   \item{\code{yopt}}{A vector containing the max/min in each projection plot.}
-  \item{\code{xdiff}}{A two-row matrix containing the differences between \code{xsol} and \code{xopt}.  The first row is the absolute difference \code{D = xopt - xsol}, the second is the relative difference \code{R = D/|xsol|}.}
-  \item{\code{ydiff}}{Same thing, but between \code{ysol} and \code{yopt}.}
+  \item{\code{xdiff}}{A two-column matrix containing the differences between \code{xsol} and \code{xopt}.  The first column is the absolute difference \code{D = xopt - xsol}, the second is the relative difference \code{R = D/|xsol|}.}
+  \item{\code{ydiff}}{A length-two vector containing the absolute and relative difference between \code{ysol} and \code{yopt}.}
 }
 }
 \description{

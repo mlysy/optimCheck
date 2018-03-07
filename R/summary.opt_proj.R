@@ -33,10 +33,10 @@ summary.opt_proj <- function(object, xnames) {
     opt.res[ii,] <- c(object$xproj[iopt,ii], object$yproj[iopt,ii])
   }
   # differences in solution
-  xdiff <- opt.res[1,] - xsol
+  xdiff <- opt.res[,1] - xsol
   xdiff <- cbind(abs = xdiff, rel = xdiff/abs(xsol))
   # differences in solution value
-  ydiff <- opt.res[2,] - ysol
+  ydiff <- opt.res[,2] - ysol
   ydiff <- cbind(abs = ydiff, rel = ydiff/abs(ysol))
   # add names
   names(xsol) <- xnames
