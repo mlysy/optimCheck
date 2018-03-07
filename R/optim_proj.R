@@ -11,7 +11,7 @@
 #' \describe{
 #'   \item{\code{xsol}}{The potential solution.}
 #'   \item{\code{ysol}}{The value of \code{fun(xsol)}.}
-#'   \item{\code{maximize}}{Logical; whether the potential solution should maximize or minimize the objective function.}
+#'   \item{\code{maximize}}{Logical indicating whether the potential solution should maximize or minimize the objective function.}
 #'   \item{\code{xproj}}{An \code{npts x nx} matrix where each column is the \code{x}-axis of the projection plot along the given component of \code{theta}.}
 #'   \item{\code{yproj}}{An \code{npts x nx} matrix where each column is the \code{y}-axis of the corresponding projection plot.}
 #' }

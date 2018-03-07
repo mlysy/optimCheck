@@ -18,6 +18,7 @@ A \code{summary.optproj} object with elements:
 \describe{
   \item{\code{xsol}}{The potential solution vector.}
   \item{\code{ysol}}{The value of the objective function at \code{xsol}.}
+  \item{\code{maximize}}{Logical indicating whether the potential solution should maximize or minimize the objective function.}
   \item{\code{xopt}}{A vector containing the argmax/argmin in each projection plot.}
   \item{\code{yopt}}{A vector containing the max/min in each projection plot.}
   \item{\code{xdiff}}{A two-column matrix containing the differences between \code{xsol} and \code{xopt}.  The first column is the absolute difference \code{D = xopt - xsol}, the second is the relative difference \code{R = D/|xsol|}.}

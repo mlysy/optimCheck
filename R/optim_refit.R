@@ -11,7 +11,7 @@
 #' \describe{
 #'   \item{\code{xsol}}{The potential solution.}
 #'   \item{\code{ysol}}{The value of \code{fun(xsol)}.}
-#'   \item{\code{maximize}}{Logical; whether the potential solution should maximize or minimize the objective function.}
+#'   \item{\code{maximize}}{Logical indicating whether the potential solution should maximize or minimize the objective function.}
 #'   \item{\code{xopt}}{The solution found by the general-purpose optimizer.}
 #'   \item{\code{yopt}}{The function value at the optimal solution, i.e., \code{fun(xopt)}.}
 #' }
