@@ -43,8 +43,8 @@ test_that("mclust::emEEE converges to local mode.", {
     }, xsol = theta.mle, xrng = .1, npts = 50)
     # minimum of relative and absolute error
     err <- summary(ocheck)$xdiff
-    err <- max(pmin(abs(err["abs",]), abs(err["rel",])))
-    expect_lt(err, .01)
+    err <- max(pmin(abs(err[,"abs"]), abs(err[,"rel"])))
+    expect_less_than(err, .01)
   })
 })
 

@@ -10,8 +10,8 @@
 #'   \item{\code{ysol}}{The value of the objective function at \code{xsol}.}
 #'   \item{\code{xopt}}{A vector containing the argmax/argmin in each projection plot.}
 #'   \item{\code{yopt}}{A vector containing the max/min in each projection plot.}
-#'   \item{\code{xdiff}}{A two-row matrix containing the differences between \code{xsol} and \code{xopt}.  The first row is the absolute difference \code{D = xopt - xsol}, the second is the relative difference \code{R = D/|xsol|}.}
-#'   \item{\code{ydiff}}{Same thing, but between \code{ysol} and \code{yopt}.}
+#'   \item{\code{xdiff}}{A two-column matrix containing the differences between \code{xsol} and \code{xopt}.  The first column is the absolute difference \code{D = xopt - xsol}, the second is the relative difference \code{R = D/|xsol|}.}
+#'   \item{\code{ydiff}}{A length-two vector containing the absolute and relative difference between \code{ysol} and \code{yopt}.}
 #' }
 #' @export
 summary.opt_refit <- function(object, xnames) {
@@ -27,7 +27,7 @@ summary.opt_refit <- function(object, xnames) {
   yopt <- object$yopt
   # differences in solution
   xdiff <- xopt - xsol
-  xdiff <- rbind(abs = xdiff, rel = xdiff/abs(xsol))
+  xdiff <- cbind(abs = xdiff, rel = xdiff/abs(xsol))
   # differences in solution value
   ydiff <- yopt - ysol
   ydiff <- c(abs = ydiff, rel = ydiff/abs(ysol))
@@ -44,7 +44,7 @@ summary.opt_refit <- function(object, xnames) {
 #' @export
 print.summary.opt_refit <- function(x,
                                     digits = max(3L, getOption("digits")-3L)) {
-  res <- cbind(x$xsol, x$xdiff["abs",], x$xdiff["rel",])
+  res <- cbind(x$xsol, x$xdiff[,"abs"], x$xdiff[,"rel"])
   colnames(res) <- c("xsol", "D=xopt-xsol", "R=D/|xsol|")
   print(signif(res, digits = digits))
 }

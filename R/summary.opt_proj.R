@@ -10,7 +10,7 @@
 #'   \item{\code{ysol}}{The value of the objective function at \code{xsol}.}
 #'   \item{\code{xopt}}{A vector containing the argmax/argmin in each projection plot.}
 #'   \item{\code{yopt}}{A vector containing the max/min in each projection plot.}
-#'   \item{\code{xdiff}}{A two-row matrix containing the differences between \code{xsol} and \code{xopt}.  The first row is the absolute difference \code{D = xopt - xsol}, the second is the relative difference \code{R = D/|xsol|}.}
+#'   \item{\code{xdiff}}{A two-column matrix containing the differences between \code{xsol} and \code{xopt}.  The first column is the absolute difference \code{D = xopt - xsol}, the second is the relative difference \code{R = D/|xsol|}.}
 #'   \item{\code{ydiff}}{Same thing, but between \code{ysol} and \code{yopt}.}
 #' }
 #' @details The \code{print} methods for the summary and \code{opt_proj} objects themselves both return a three-column matrix, consisting of the potential solution (\code{xsol}), the optimal solution in each projection plot (\code{xopt}), and the relative difference between the two (\code{R = (xopt - xsol)/|xsol|}).
@@ -27,24 +27,24 @@ summary.opt_proj <- function(object, xnames) {
     if(is.null(xnames)) xnames <- paste0("x",1:nx)
   }
   # store argmax/argmin and max/min in each projection plot
-  opt.res <- matrix(NA, 2, nx)
+  opt.res <- matrix(NA, nx, 2)
   for(ii in 1:nx) {
     iopt <- which.opt(object$yproj[,ii])
-    opt.res[,ii] <- c(object$xproj[iopt,ii], object$yproj[iopt,ii])
+    opt.res[ii,] <- c(object$xproj[iopt,ii], object$yproj[iopt,ii])
   }
   # differences in solution
   xdiff <- opt.res[1,] - xsol
-  xdiff <- rbind(abs = xdiff, rel = xdiff/abs(xsol))
+  xdiff <- cbind(abs = xdiff, rel = xdiff/abs(xsol))
   # differences in solution value
   ydiff <- opt.res[2,] - ysol
-  ydiff <- rbind(abs = ydiff, rel = ydiff/abs(ysol))
+  ydiff <- cbind(abs = ydiff, rel = ydiff/abs(ysol))
   # add names
   names(xsol) <- xnames
-  colnames(opt.res) <- xnames
-  colnames(xdiff) <- xnames
-  colnames(ydiff) <- xnames
+  rownames(opt.res) <- xnames
+  rownames(xdiff) <- xnames
+  rownames(ydiff) <- xnames
   ans <- list(xsol = xsol, ysol = ysol,
-              xopt = opt.res[1,], yopt = opt.res[2,],
+              xopt = opt.res[,1], yopt = opt.res[,2],
               xdiff = xdiff, ydiff = ydiff)
   class(ans) <- "summary.opt_proj"
   ans
@@ -56,7 +56,7 @@ summary.opt_proj <- function(object, xnames) {
 #' @export
 print.summary.opt_proj <- function(x,
                                    digits = max(3L, getOption("digits")-3L)) {
-  res <- cbind(x$xsol, x$xdiff["abs",], x$xdiff["rel",])
+  res <- cbind(x$xsol, x$xdiff[,"abs"], x$xdiff[,"rel"])
   colnames(res) <- c("xsol", "D=xopt-xsol", "R=D/|xsol|")
   print(signif(res, digits = digits))
 }
