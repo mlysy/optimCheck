@@ -28,9 +28,9 @@
 #'   oproj <- optim_proj(xsol = bhat,
 #'                       fun = function(beta) loglik(beta, y, X))
 #' })
-#' oproj # see ?summary.opt_proj for more information
+#' oproj # see ?summary.optproj for more information
 #'
-#' # plot itself: see ?plot.opt_proj
+#' # plot itself: see ?plot.optproj
 #' bnames <- parse(text = paste0("beta[", 1:p, "]"))
 #' plot(oproj, xnames = bnames,
 #'      xlab = "Coefficient", ylab = "Loglikelihood")

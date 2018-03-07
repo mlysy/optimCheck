@@ -18,7 +18,7 @@ optim_proj(xsol, fun, maximize = TRUE, xrng = 0.1, npts = 100)
 \item{npts}{Number of points in each projection plot.}
 }
 \value{
-An object of class \code{opt_proj} consisting of the elements:
+An object of class \code{optproj} consisting of the elements:
 \describe{
   \item{\code{xsol}}{The potential solution.}
   \item{\code{ysol}}{The value of \code{fun(xsol)}.}

@@ -7,7 +7,7 @@
 #' @param maximize Logical, whether a maximum or a minimum of the objective function is sought.
 #' @param maxit Maximum number of iterations for optimization algorithm (see Details).
 #' @param reltol Relative tolerance for convergence of optimization algorithm (see Details).
-#' @return An object of class \code{opt_refit} consisting of the elements:
+#' @return An object of class \code{optrefit} consisting of the elements:
 #' \describe{
 #'   \item{\code{xsol}}{The potential solution.}
 #'   \item{\code{ysol}}{The value of \code{fun(xsol)}.}
@@ -32,6 +32,6 @@ optim_refit <- function(xsol, fun, maximize = TRUE,
   ans <- list(xsol = xsol, ysol = fun(xsol),
               maximize = maximize,
               xopt = ans$par, yopt = ans$value)
-  class(ans) <- "opt_refit"
+  class(ans) <- c("optrefit", "optcheck")
   ans
 }

@@ -18,7 +18,7 @@ optim_refit(xsol, fun, maximize = TRUE, maxit = 5000, reltol = 1e-08)
 \item{reltol}{Relative tolerance for convergence of optimization algorithm (see Details).}
 }
 \value{
-An object of class \code{opt_refit} consisting of the elements:
+An object of class \code{optrefit} consisting of the elements:
 \describe{
   \item{\code{xsol}}{The potential solution.}
   \item{\code{ysol}}{The value of \code{fun(xsol)}.}

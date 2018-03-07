@@ -7,7 +7,7 @@
 #' @param maximize Logical, whether a maximum or a minimum of the objective function is sought.
 #' @param xrng Optional specification of the range of each projection plot.  Can be: (i) a \code{2 x nx} matrix giving the endpoints of the range, (ii) a scalar or vector of length \code{nx}, such that the range in each plot is \code{theta +/- xrange * abs(theta)}.
 #' @param npts Number of points in each projection plot.
-#' @return An object of class \code{opt_proj} consisting of the elements:
+#' @return An object of class \code{optproj} consisting of the elements:
 #' \describe{
 #'   \item{\code{xsol}}{The potential solution.}
 #'   \item{\code{ysol}}{The value of \code{fun(xsol)}.}
@@ -54,6 +54,6 @@ optim_proj <- function(xsol, fun, maximize = TRUE, xrng = .1,
   }
   ans <- list(xsol = xsol, ysol = fun(xsol), maximize = maximize,
               xproj = xproj, yproj = yproj)
-  class(ans) <- "opt_proj"
+  class(ans) <- c("optproj", "optcheck")
   ans
 }

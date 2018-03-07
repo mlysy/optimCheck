@@ -1,10 +1,10 @@
 #' \code{summary} method for projection plots.
 #'
-#' @name summary.opt_proj
-#' @aliases print.opt_proj print.summary.opt_proj
-#' @param object An \code{opt_proj} object, i.e., output from the function \code{\link{optim_proj}}.
+#' @name summary.optproj
+#' @aliases print.optproj print.summary.optproj
+#' @param object An \code{optproj} object, i.e., output from the function \code{\link{optim_proj}}.
 #' @param xnames Optional vector of names for the elements of the potential solution.
-#' @return A list with elements:
+#' @return A \code{summary.optproj} object with elements:
 #' \describe{
 #'   \item{\code{xsol}}{The potential solution vector.}
 #'   \item{\code{ysol}}{The value of the objective function at \code{xsol}.}
@@ -13,9 +13,9 @@
 #'   \item{\code{xdiff}}{A two-column matrix containing the differences between \code{xsol} and \code{xopt}.  The first column is the absolute difference \code{D = xopt - xsol}, the second is the relative difference \code{R = D/|xsol|}.}
 #'   \item{\code{ydiff}}{Same thing, but between \code{ysol} and \code{yopt}.}
 #' }
-#' @details The \code{print} methods for the summary and \code{opt_proj} objects themselves both return a three-column matrix, consisting of the potential solution (\code{xsol}), the optimal solution in each projection plot (\code{xopt}), and the relative difference between the two (\code{R = (xopt - xsol)/|xsol|}).
+#' @details The \code{print} methods for \code{summary.optproj} and \code{optproj} objects themselves both return a three-column matrix, consisting of the potential solution (\code{xsol}), the optimal solution in each projection plot (\code{xopt}), and the relative difference between the two (\code{R = (xopt - xsol)/|xsol|}).
 #' @export
-summary.opt_proj <- function(object, xnames) {
+summary.optproj <- function(object, xnames) {
   xsol <- object$xsol
   ysol <- object$ysol
   nx <- length(xsol)
@@ -46,26 +46,26 @@ summary.opt_proj <- function(object, xnames) {
   ans <- list(xsol = xsol, ysol = ysol,
               xopt = opt.res[,1], yopt = opt.res[,2],
               xdiff = xdiff, ydiff = ydiff)
-  class(ans) <- "summary.opt_proj"
+  class(ans) <- c("summary.optproj", "summary.optcheck")
   ans
 }
 
 #--- print methods -------------------------------------------------------------
 
-#' @rdname summary.opt_proj
-#' @export
-print.summary.opt_proj <- function(x,
-                                   digits = max(3L, getOption("digits")-3L)) {
-  res <- cbind(x$xsol, x$xdiff[,"abs"], x$xdiff[,"rel"])
-  colnames(res) <- c("xsol", "D=xopt-xsol", "R=D/|xsol|")
-  print(signif(res, digits = digits))
-}
+## #' @rdname summary.optproj
+## #' @export
+## print.summary.optproj <- function(x,
+##                                    digits = max(3L, getOption("digits")-3L)) {
+##   res <- cbind(x$xsol, x$xdiff[,"abs"], x$xdiff[,"rel"])
+##   colnames(res) <- c("xsol", "D=xopt-xsol", "R=D/|xsol|")
+##   print(signif(res, digits = digits))
+## }
 
-#' @rdname summary.opt_proj
-#' @export
-print.opt_proj <- function(x,
-                           digits = max(3L, getOption("digits")-3L)) {
-  osum <- summary(x)
-  print(osum, digits = digits)
-}
+## #' @rdname summary.optproj
+## #' @export
+## print.optproj <- function(x,
+##                            digits = max(3L, getOption("digits")-3L)) {
+##   osum <- summary(x)
+##   print(osum, digits = digits)
+## }
 

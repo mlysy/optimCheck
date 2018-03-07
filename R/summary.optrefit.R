@@ -1,8 +1,8 @@
-#' \code{summary} method for \code{opt_refit} objects.
+#' \code{summary} method for \code{optrefit} objects.
 #'
-#' @name summary.opt_refit
-#' @aliases print.opt_reft print.summary.opt_refit
-#' @param object An \code{opt_refit} object, i.e., output from the function \code{\link{optim_refit}}.
+#' @name summary.optrefit
+#' @aliases print.optrefit print.summary.optrefit
+#' @param object An \code{optrefit} object, i.e., output from the function \code{\link{optim_refit}}.
 #' @param xnames Optional vector of names for the elements of the potential solution.
 #' @return A list with elements:
 #' \describe{
@@ -14,7 +14,7 @@
 #'   \item{\code{ydiff}}{A length-two vector containing the absolute and relative difference between \code{ysol} and \code{yopt}.}
 #' }
 #' @export
-summary.opt_refit <- function(object, xnames) {
+summary.optrefit <- function(object, xnames) {
   xsol <- object$xsol
   ysol <- object$ysol
   nx <- length(xsol)
@@ -34,26 +34,26 @@ summary.opt_refit <- function(object, xnames) {
   ans <- list(xsol = xsol, ysol = ysol,
               xopt = xopt, yopt = yopt,
               xdiff = xdiff, ydiff = ydiff)
-  class(ans) <- "summary.opt_refit"
+  class(ans) <- c("summary.optrefit", "summary.optcheck")
   ans
 }
 
 #--- print methods -------------------------------------------------------------
 
-#' @rdname summary.opt_refit
-#' @export
-print.summary.opt_refit <- function(x,
-                                    digits = max(3L, getOption("digits")-3L)) {
-  res <- cbind(x$xsol, x$xdiff[,"abs"], x$xdiff[,"rel"])
-  colnames(res) <- c("xsol", "D=xopt-xsol", "R=D/|xsol|")
-  print(signif(res, digits = digits))
-}
+## #' @rdname summary.optrefit
+## #' @export
+## print.summary.optrefit <- function(x,
+##                                    digits = max(3L, getOption("digits")-3L)) {
+##   res <- cbind(x$xsol, x$xdiff[,"abs"], x$xdiff[,"rel"])
+##   colnames(res) <- c("xsol", "D=xopt-xsol", "R=D/|xsol|")
+##   print(signif(res, digits = digits))
+## }
 
-#' @rdname summary.opt_refit
-#' @export
-print.opt_refit <- function(x,
-                            digits = max(3L, getOption("digits")-3L)) {
-  osum <- summary(x)
-  print(osum, digits = digits)
-}
+## #' @rdname summary.optrefit
+## #' @export
+## print.optrefit <- function(x,
+##                             digits = max(3L, getOption("digits")-3L)) {
+##   osum <- summary(x)
+##   print(osum, digits = digits)
+## }
 

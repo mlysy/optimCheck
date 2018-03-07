@@ -1,6 +1,6 @@
 #' Projection plots for optimization routines.
 #'
-#' @param x An \code{opt_proj} object, i.e., output from function \code{\link{optim_proj}}.
+#' @param x An \code{optproj} object, i.e., output from function \code{\link{optim_proj}}.
 #' @param xnames Optional vector of element names of potential solution for plot titles.
 #' @param xind Integer or logical vector of indices indicating which projections should be plotted.  Defaults to all projection plots.
 #' @param equalize If \code{TRUE}, narrows the range in each projection plot such that the y-value is more or less the same at either endpoint.
@@ -8,7 +8,7 @@
 #' @param xlab,ylab Outer x-axis and y-axis labels.
 #' @return A grid of projection plots, with vertical lines at the potential solution.
 #' @export
-plot.opt_proj <- function(x, xnames, xind, equalize = TRUE,
+plot.optproj <- function(x, xnames, xind, equalize = TRUE,
                           layout, xlab, ylab) {
   xsol <- x$xsol
   nx <- length(xsol)
