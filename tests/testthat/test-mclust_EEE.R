@@ -2,6 +2,7 @@
 
 context("Gaussian mixture models")
 
+source("optimCheck-testfunctions.R")
 source("mclust-testfunctions.R")
 
 # loglikelihood on flattened parameter scale
@@ -41,9 +42,8 @@ test_that("mclust::emEEE converges to local mode.", {
     ocheck <- optim_proj(fun = function(theta) {
       loglik(theta, d, G, y[,-1])
     }, xsol = theta.mle, xrng = .1, npts = 50)
-    # minimum of relative and absolute difference between xsol and xopt
-    xerr <- diff(ocheck)
-    expect_lt(max(xerr), .01)
+    # largest of min(abs,rel) difference between xsol and xopt
+    expect_lt(max.xdiff(ocheck), .01)
   })
 })
 

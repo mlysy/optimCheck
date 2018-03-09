@@ -2,6 +2,8 @@
 
 context("Logistic regression")
 
+source("optimCheck-testfunctions.R")
+
 # likelihood function
 loglik <- function(beta, y, X) {
   sum(dbinom(y, size = 1,
@@ -15,7 +17,7 @@ test_that("glm/logistic converges according to optim_proj.", {
     # generate data
     n <- sample(100:200,1)
     p <- sample(2:10,1)
-    X <- matrix(rnorm(n*p),n,p)
+    X <- rMnorm(n,p)
     beta0 <- rnorm(p, sd = .1)
     # response
     y <- rbinom(n, size = 1, prob = binomial()$linkinv(X %*% beta0))
@@ -24,9 +26,8 @@ test_that("glm/logistic converges according to optim_proj.", {
     # check with optim_proj
     ocheck <- optim_proj(fun = function(beta) loglik(beta, y, X),
                          xsol = beta.hat)
-    # minimum of relative and absolute difference between xsol and xopt
-    xerr <- diff(ocheck)
-    expect_lt(max(xerr), .01)
+    # largest of min(abs,rel) difference between xsol and xopt
+    expect_lt(max.xdiff(ocheck), .01)
   })
 })
 
@@ -35,7 +36,7 @@ test_that("glm/logistic converges according to optim_refit.", {
     # generate data
     n <- sample(100:200,1)
     p <- sample(2:10,1)
-    X <- matrix(rnorm(n*p),n,p)
+    X <- rMnorm(n,p)
     beta0 <- rnorm(p, sd = .1)
     # response
     y <- rbinom(n, size = 1, prob = binomial()$linkinv(X %*% beta0))
@@ -44,9 +45,8 @@ test_that("glm/logistic converges according to optim_refit.", {
     # check with optim_proj
     ocheck <- optim_refit(fun = function(beta) loglik(beta, y, X),
                           xsol = beta.hat)
-    # minimum of relative and absolute difference between xsol and xopt
-    xerr <- diff(ocheck)
-    expect_lt(max(xerr), .01)
+    # largest of min(abs,rel) difference between xsol and xopt
+    expect_lt(max.xdiff(ocheck), .01)
   })
 })
 

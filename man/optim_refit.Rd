@@ -18,7 +18,7 @@ optim_refit(xsol, fun, maximize = TRUE, maxit = 5000, reltol = 1e-08)
 \item{reltol}{Relative tolerance for convergence of optimization algorithm (see Details).}
 }
 \value{
-An object of class \code{optrefit} consisting of the elements:
+An object of class \code{optrefit} inheriting from \code{optcheck}, with elements:
 \describe{
   \item{\code{xsol}}{The potential solution.}
   \item{\code{ysol}}{The value of \code{fun(xsol)}.}
@@ -32,4 +32,7 @@ If the potential solution is equal or close to the optimum of the objective func
 }
 \details{
 This is simply a wrapper to the \code{\link{stats::optim}} function using the Nelder-Mead method, with tuning to search for a high-precision solution when a good initial value is supplied (i.e., \code{xsol}).
+}
+\seealso{
+\code{\link{summary.optcheck}}, \code{\link{print.optcheck}}, and \code{\link{diff.optcheck}} for \code{summary}, \code{print}, and \code{diff} methods.
 }

@@ -1,10 +1,9 @@
 #' \code{summary} method for \code{optrefit} objects.
 #'
 #' @name summary.optrefit
-#' @aliases print.optrefit print.summary.optrefit
 #' @param object An \code{optrefit} object, i.e., output from the function \code{\link{optim_refit}}.
 #' @param xnames Optional vector of names for the elements of the potential solution.
-#' @return A list with elements:
+#' @return An object of class \code{summary.optrefit} inheriting from \code{summary.optcheck}, with elements:
 #' \describe{
 #'   \item{\code{xsol}}{The potential solution vector.}
 #'   \item{\code{ysol}}{The value of the objective function at \code{xsol}.}
@@ -14,6 +13,7 @@
 #'   \item{\code{xdiff}}{A two-column matrix containing the differences between \code{xsol} and \code{xopt}.  The first column is the absolute difference \code{D = xopt - xsol}, the second is the relative difference \code{R = D/|xsol|}.}
 #'   \item{\code{ydiff}}{A length-two vector containing the absolute and relative difference between \code{ysol} and \code{yopt}.}
 #' }
+#' @seealso \code{\link{print.summary.optcheck}} for \code{print} method.
 #' @export
 summary.optrefit <- function(object, xnames) {
   xsol <- object$xsol

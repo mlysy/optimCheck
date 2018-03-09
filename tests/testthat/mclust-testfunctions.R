@@ -6,12 +6,6 @@ rDirichlet <- function(n, alpha) {
   drop(t(X)/colSums(X))
 }
 
-# generate an n x p matrix of iid N(0,1)
-rMnorm <- function(n, p) {
-  if(missing(p)) p <- n
-  matrix(rnorm(n*p), n, p)
-}
-
 # convert back and forth between "flattened" parameter representation,
 # i.e., theta = c(pro[-G], mean, upper.tri(variance))
 par2theta <- function(parameters) {

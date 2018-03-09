@@ -18,7 +18,7 @@ optim_proj(xsol, fun, maximize = TRUE, xrng = 0.1, npts = 100)
 \item{npts}{Number of points in each projection plot.}
 }
 \value{
-An object of class \code{optproj} consisting of the elements:
+An object of class \code{optproj} inheriting from \code{optcheck}, with elements:
 \describe{
   \item{\code{xsol}}{The potential solution.}
   \item{\code{ysol}}{The value of \code{fun(xsol)}.}
@@ -29,4 +29,7 @@ An object of class \code{optproj} consisting of the elements:
 }
 \description{
 Given the objective function of an optimization problem and a potential solution, calculates "projection plots" along each coordinate of the solution vector, with all other coordinates being fixed at the input values.
+}
+\seealso{
+\code{\link{summary.optproj}}, \code{\link{print.optproj}}, and \code{\link{diff.optproj}} for \code{summary}, \code{print}, and \code{diff} methods.
 }

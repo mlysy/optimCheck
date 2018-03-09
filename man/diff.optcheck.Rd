@@ -2,20 +2,27 @@
 % Please edit documentation in R/diff.optcheck.R
 \name{diff.optcheck}
 \alias{diff.optcheck}
+\alias{diff.summary.optcheck}
 \alias{diff.optproj}
-\alias{diff.optrefit}
 \alias{diff.summary.optproj}
+\alias{diff.optrefit}
 \alias{diff.summary.optrefit}
+\alias{diff.summary.optcheck}
 \title{Elementwise difference between potential and optimal solutions.}
 \usage{
 \method{diff}{optcheck}(x)
+
+\method{diff}{summary.optcheck}(x)
 }
 \arguments{
-\item{x}{An object of class \code{optproj}, \code{optrefit}, \code{summary.optproj}, or \code{summary.optrefit}.}
+\item{x}{Object of class \code{optcheck} or \code{summary.optcheck}, currently returned by \code{\link{optim_proj}}, \code{\link{optim_refit}}, or a summary of either of those calls.}
 }
 \value{
-The minimum of the absolute and relative difference between each element of the potential solution (\code{xsol}) and the optimial solution (\code{xopt}) obtained from either \code{\link{optim_proj}} or \code{\link{optim_refit}}.
+A two-column matrix consisting of the absolute and relative differences between the potential and optimal solutions (\code{xsol} and \code{xopt}).
 }
 \description{
 Elementwise difference between potential and optimal solutions.
+}
+\details{
+This function is simply a wrapper to \code{summary(x)$xdiff} and \code{x$xdiff}, for \code{optcheck} and \code{summary.optcheck} objects respectively.
 }

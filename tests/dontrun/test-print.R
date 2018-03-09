@@ -22,3 +22,5 @@ oproj <- optim_proj(fun = function(beta) loglik(beta, y, X),
 
 orefit <- optim_refit(fun = function(beta) loglik(beta, y, X),
                       xsol = beta.hat)
+
+orefit

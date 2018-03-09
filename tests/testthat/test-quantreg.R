@@ -1,5 +1,7 @@
 context("Quantile regression")
 
+source("optimCheck-testfunctions.R")
+
 # quantile regression objective function
 qr.obj <- function(y, X, beta, tau) {
   u <- y - c(X %*% beta)
@@ -26,8 +28,7 @@ test_that("quantreg::rq converges to local mode", {
     ocheck <- optim_proj(fun = function(beta) {
       qr.obj(y = y, X = X, beta = beta, tau = tau)
     }, xsol = beta.hat, maximize = FALSE)
-    # minimum of relative and absolute difference between xsol and xopt
-    xerr <- diff(ocheck)
-    expect_lt(max(xerr), .01)
+    # largest of min(abs,rel) difference between xsol and xopt
+    expect_lt(max.xdiff(ocheck), .01)
   })
 })

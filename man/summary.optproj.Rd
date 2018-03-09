@@ -2,8 +2,6 @@
 % Please edit documentation in R/summary.optproj.R
 \name{summary.optproj}
 \alias{summary.optproj}
-\alias{print.optproj}
-\alias{print.summary.optproj}
 \title{\code{summary} method for projection plots.}
 \usage{
 \method{summary}{optproj}(object, xnames)
@@ -14,7 +12,7 @@
 \item{xnames}{Optional vector of names for the elements of the potential solution.}
 }
 \value{
-A \code{summary.optproj} object with elements:
+An object of class \code{summary.optproj} inheriting from \code{summary.optcheck}, with elements:
 \describe{
   \item{\code{xsol}}{The potential solution vector.}
   \item{\code{ysol}}{The value of the objective function at \code{xsol}.}
@@ -30,4 +28,7 @@ A \code{summary.optproj} object with elements:
 }
 \details{
 The \code{print} methods for \code{summary.optproj} and \code{optproj} objects themselves both return a three-column matrix, consisting of the potential solution (\code{xsol}), the optimal solution in each projection plot (\code{xopt}), and the relative difference between the two (\code{R = (xopt - xsol)/|xsol|}).
+}
+\seealso{
+\code{\link{print.summary.optproj}} for \code{print} method.
 }

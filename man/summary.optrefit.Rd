@@ -2,8 +2,6 @@
 % Please edit documentation in R/summary.optrefit.R
 \name{summary.optrefit}
 \alias{summary.optrefit}
-\alias{print.optrefit}
-\alias{print.summary.optrefit}
 \title{\code{summary} method for \code{optrefit} objects.}
 \usage{
 \method{summary}{optrefit}(object, xnames)
@@ -14,7 +12,7 @@
 \item{xnames}{Optional vector of names for the elements of the potential solution.}
 }
 \value{
-A list with elements:
+An object of class \code{summary.optrefit} inheriting from \code{summary.optcheck}, with elements:
 \describe{
   \item{\code{xsol}}{The potential solution vector.}
   \item{\code{ysol}}{The value of the objective function at \code{xsol}.}
@@ -27,4 +25,7 @@ A list with elements:
 }
 \description{
 \code{summary} method for \code{optrefit} objects.
+}
+\seealso{
+\code{\link{print.summary.optcheck}} for \code{print} method.
 }

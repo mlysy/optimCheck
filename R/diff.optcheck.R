@@ -1,22 +1,22 @@
 #' Elementwise difference between potential and optimal solutions.
 #'
-#' @aliases diff.optproj diff.optrefit diff.summary.optproj diff.summary.optrefit
-#' @param x An object of class \code{optproj}, \code{optrefit}, \code{summary.optproj}, or \code{summary.optrefit}.
-#' @return The minimum of the absolute and relative difference between each element of the potential solution (\code{xsol}) and the optimial solution (\code{xopt}) obtained from either \code{\link{optim_proj}} or \code{\link{optim_refit}}.
+#' @name diff.optcheck
+#' @aliases diff.summary.optcheck diff.optproj diff.summary.optproj diff.optrefit  diff.summary.optrefit
+#' @param x Object of class \code{optcheck} or \code{summary.optcheck}, currently returned by \code{\link{optim_proj}}, \code{\link{optim_refit}}, or a summary of either of those calls.
+#' @return A two-column matrix consisting of the absolute and relative differences between the potential and optimal solutions (\code{xsol} and \code{xopt}).
+#' @details This function is simply a wrapper to \code{summary(x)$xdiff} and \code{x$xdiff}, for \code{optcheck} and \code{summary.optcheck} objects respectively.
 #' @export
 diff.optcheck <- function(x) {
-  xerr <- abs(summary(x)$xdiff) # absolute and relative differences
-  xerr <- pmin(xerr[,"abs"], xerr[,"rel"]) # elementwise min between the two
+  xdiff <- summary(x)$xdiff
   if(is.null(names(x$xsol))) {
     # only add names if they are provided
-    names(xerr) <- NULL
+    colnames(xdiff) <- NULL
   }
-  xerr
+  xdiff
 }
 
+#' @rdname diff.optcheck
 #' @export
 diff.summary.optcheck <- function(x) {
-  xerr <- abs(summary(x)$xdiff) # absolute and relative differences
-  xerr <- pmin(xerr[,"abs"], xerr[,"rel"]) # elementwise min between the two
-  xerr
+  x$xdiff
 }
