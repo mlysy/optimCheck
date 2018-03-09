@@ -22,7 +22,7 @@ optim_proj <- function(xsol, fun, maximize = TRUE, xrng = .1,
   nx <- length(xsol) # number of parameters
   xproj <- matrix(NA, npts, nx) # x-axis of plots
   yproj <- matrix(NA, npts, nx) # y-axis of plots
-  equalize <- FALSE # disabled
+  ## equalize <- FALSE # disabled
   if(!is.matrix(xrng)) {
     # default range is +/- .1 * max(abs(xsol))
     xrng <- xrng * abs(xsol)
@@ -34,21 +34,21 @@ optim_proj <- function(xsol, fun, maximize = TRUE, xrng = .1,
   }
   for(ii in 1:nx) {
     xseq <- seq(from = xrng[1,ii],
-                     to = xrng[2,ii], len = npts)
-    for(jj in 1:2) {
-      # evaluate likelihood fixing all components except one
-      yval <- sapply(xseq, function(xi) {
-        x <- xsol
-        x[ii] <- xi
-        fun(x)
-      })
-      if(!maximize) yval <- -yval
-      if(jj == 1 && equalize) {
-        xseq <- .equalize_xlim(xseq, yval, xsol[ii])
-        xseq <- seq(xseq[1], xseq[2], len = npts)
-      } else break
-    }
-    if(!maximize) yval <- -yval
+                to = xrng[2,ii], len = npts)
+    ## for(jj in 1:2) {
+    # evaluate likelihood fixing all components except one
+    yval <- sapply(xseq, function(xi) {
+      x <- xsol
+      x[ii] <- xi
+      fun(x)
+    })
+    ## if(!maximize) yval <- -yval
+    ##   if(jj == 1 && equalize) {
+    ##     xseq <- .equalize_xlim(xseq, yval, xsol[ii])
+    ##     xseq <- seq(xseq[1], xseq[2], len = npts)
+    ##   } else break
+    ## }
+    ## if(!maximize) yval <- -yval
     # store calcs
     xproj[,ii] <- xseq
     yproj[,ii] <- yval

@@ -10,12 +10,14 @@
 \alias{diff.summary.optcheck}
 \title{Elementwise difference between potential and optimal solutions.}
 \usage{
-\method{diff}{optcheck}(x)
+\method{diff}{optcheck}(x, ...)
 
-\method{diff}{summary.optcheck}(x)
+\method{diff}{summary.optcheck}(x, ...)
 }
 \arguments{
 \item{x}{Object of class \code{optcheck} or \code{summary.optcheck}, currently returned by \code{\link{optim_proj}}, \code{\link{optim_refit}}, or a summary of either of those calls.}
+
+\item{...}{Further arguments to be passed to or from other methods.}
 }
 \value{
 A two-column matrix consisting of the absolute and relative differences between the potential and optimal solutions (\code{xsol} and \code{xopt}).

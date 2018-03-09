@@ -4,12 +4,14 @@
 \alias{summary.optproj}
 \title{\code{summary} method for projection plots.}
 \usage{
-\method{summary}{optproj}(object, xnames)
+\method{summary}{optproj}(object, xnames, ...)
 }
 \arguments{
 \item{object}{An \code{optproj} object, i.e., output from the function \code{\link{optim_proj}}.}
 
 \item{xnames}{Optional vector of names for the elements of the potential solution.}
+
+\item{...}{Further arguments to be passed to or from other methods.}
 }
 \value{
 An object of class \code{summary.optproj} inheriting from \code{summary.optcheck}, with elements:

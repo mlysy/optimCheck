@@ -11,10 +11,10 @@
 \title{Print method for \code{optcheck} and \code{summary.optcheck} objects.}
 \usage{
 \method{print}{optcheck}(x, digits = max(3L, getOption("digits") - 3L),
-  n = 5L)
+  n = 5L, ...)
 
 \method{print}{summary.optcheck}(x, digits = max(3L, getOption("digits") -
-  3L), n = 5L)
+  3L), n = 5L, ...)
 }
 \arguments{
 \item{x}{Object of class \code{optcheck} or \code{summary.optcheck}, currently returned by \code{\link{optim_proj}}, \code{\link{optim_refit}}, or a summary of either of those calls.}
@@ -22,6 +22,8 @@
 \item{digits}{Number of digits to display.}
 
 \item{n}{Number of elements of solution vector to display (see Details).}
+
+\item{...}{Further arguments to be passed to or from other methods.}
 }
 \value{
 Invisibly \code{x} itself.

@@ -4,12 +4,14 @@
 \alias{summary.optrefit}
 \title{\code{summary} method for \code{optrefit} objects.}
 \usage{
-\method{summary}{optrefit}(object, xnames)
+\method{summary}{optrefit}(object, xnames, ...)
 }
 \arguments{
 \item{object}{An \code{optrefit} object, i.e., output from the function \code{\link{optim_refit}}.}
 
 \item{xnames}{Optional vector of names for the elements of the potential solution.}
+
+\item{...}{Further arguments to be passed to or from other methods.}
 }
 \value{
 An object of class \code{summary.optrefit} inheriting from \code{summary.optcheck}, with elements:

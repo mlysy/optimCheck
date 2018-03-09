@@ -15,8 +15,8 @@
 #'   \item{\code{xopt}}{The solution found by the general-purpose optimizer.}
 #'   \item{\code{yopt}}{The function value at the optimal solution, i.e., \code{fun(xopt)}.}
 #' }
-#' @details This is simply a wrapper to the \code{\link{stats::optim}} function using the Nelder-Mead method, with tuning to search for a high-precision solution when a good initial value is supplied (i.e., \code{xsol}).
-#' @seealso \code{\link{summary.optcheck}}, \code{\link{print.optcheck}}, and \code{\link{diff.optcheck}} for \code{summary}, \code{print}, and \code{diff} methods.
+#' @details This is simply a wrapper to the \code{\link[stats]{optim}} function using the Nelder-Mead method, with tuning to search for a high-precision solution when a good initial value is supplied (i.e., \code{xsol}).
+#' @seealso \code{\link{summary.optrefit}}, \code{\link{print.optrefit}}, and \code{\link{diff.optrefit}} for \code{summary}, \code{print}, and \code{diff} methods.
 #' @export
 optim_refit <- function(xsol, fun, maximize = TRUE,
                         maxit = 5e3, reltol = 1e-8) {

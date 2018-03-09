@@ -6,10 +6,11 @@
 #' @param equalize If \code{TRUE}, narrows the range in each projection plot such that the y-value is more or less the same at either endpoint.
 #' @param layout Optional vector giving the number of rows and columns in the plot layout.  For \code{nx} plots, defaults to \code{c(nr, nc)}, where \code{nr = floor(nx)} and \code{nc = ceiling(nx/nr)}.
 #' @param xlab,ylab Outer x-axis and y-axis labels.
+#' @param ... Further arguments to be passed to or from other methods.
 #' @return A grid of projection plots, with vertical lines at the potential solution.
 #' @export
 plot.optproj <- function(x, xnames, xind, equalize = TRUE,
-                          layout, xlab, ylab) {
+                         layout, xlab, ylab, ...) {
   xsol <- x$xsol
   nx <- length(xsol)
   xout <- x$xproj

@@ -7,5 +7,6 @@ Author: Martin Lysy
 Maintainer: Martin Lysy <mlysy@uwaterloo.ca>
 Description: Tools for checking that the output of an optimization algorithm is indeed at a local mode of the objective function.  This is accomplished graphically by plotting one-dimensional projections of the objective function along each input variable with all other elements of the potential solution being fixed.  The numerical values in these plots can be readily extracted for the purpose of automated and systematic unit-testing of optimization routines.   
 License: GPL-3
+Imports: stats, graphics
 RoxygenNote: 6.0.1
 Suggests: testthat, quantreg, mclust

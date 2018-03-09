@@ -3,6 +3,7 @@
 #' @name summary.optproj
 #' @param object An \code{optproj} object, i.e., output from the function \code{\link{optim_proj}}.
 #' @param xnames Optional vector of names for the elements of the potential solution.
+#' @param ... Further arguments to be passed to or from other methods.
 #' @return An object of class \code{summary.optproj} inheriting from \code{summary.optcheck}, with elements:
 #' \describe{
 #'   \item{\code{xsol}}{The potential solution vector.}
@@ -16,7 +17,7 @@
 #' @details The \code{print} methods for \code{summary.optproj} and \code{optproj} objects themselves both return a three-column matrix, consisting of the potential solution (\code{xsol}), the optimal solution in each projection plot (\code{xopt}), and the relative difference between the two (\code{R = (xopt - xsol)/|xsol|}).
 #' @seealso \code{\link{print.summary.optproj}} for \code{print} method.
 #' @export
-summary.optproj <- function(object, xnames) {
+summary.optproj <- function(object, xnames, ...) {
   xsol <- object$xsol
   ysol <- object$ysol
   nx <- length(xsol)

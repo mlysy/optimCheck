@@ -4,7 +4,8 @@
 \alias{plot.optproj}
 \title{Projection plots for optimization routines.}
 \usage{
-\method{plot}{optproj}(x, xnames, xind, equalize = TRUE, layout, xlab, ylab)
+\method{plot}{optproj}(x, xnames, xind, equalize = TRUE, layout, xlab, ylab,
+  ...)
 }
 \arguments{
 \item{x}{An \code{optproj} object, i.e., output from function \code{\link{optim_proj}}.}
@@ -18,6 +19,8 @@
 \item{layout}{Optional vector giving the number of rows and columns in the plot layout.  For \code{nx} plots, defaults to \code{c(nr, nc)}, where \code{nr = floor(nx)} and \code{nc = ceiling(nx/nr)}.}
 
 \item{xlab, ylab}{Outer x-axis and y-axis labels.}
+
+\item{...}{Further arguments to be passed to or from other methods.}
 }
 \value{
 A grid of projection plots, with vertical lines at the potential solution.

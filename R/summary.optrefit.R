@@ -3,6 +3,7 @@
 #' @name summary.optrefit
 #' @param object An \code{optrefit} object, i.e., output from the function \code{\link{optim_refit}}.
 #' @param xnames Optional vector of names for the elements of the potential solution.
+#' @param ... Further arguments to be passed to or from other methods.
 #' @return An object of class \code{summary.optrefit} inheriting from \code{summary.optcheck}, with elements:
 #' \describe{
 #'   \item{\code{xsol}}{The potential solution vector.}
@@ -15,7 +16,7 @@
 #' }
 #' @seealso \code{\link{print.summary.optcheck}} for \code{print} method.
 #' @export
-summary.optrefit <- function(object, xnames) {
+summary.optrefit <- function(object, xnames, ...) {
   xsol <- object$xsol
   ysol <- object$ysol
   nx <- length(xsol)

@@ -2,6 +2,8 @@
 #'
 #' @name optimCheck
 #' @docType package
+#' @importFrom graphics abline mtext par plot
+#' @importFrom stats optim
 #' @examples
 #' # example: logistic regression
 #' ilogit <- binomial()$linkinv

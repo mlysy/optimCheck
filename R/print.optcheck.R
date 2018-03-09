@@ -5,12 +5,12 @@
 #' @param x Object of class \code{optcheck} or \code{summary.optcheck}, currently returned by \code{\link{optim_proj}}, \code{\link{optim_refit}}, or a summary of either of those calls.
 #' @param digits Number of digits to display.
 #' @param n Number of elements of solution vector to display (see Details).
+#' @param ... Further arguments to be passed to or from other methods.
 #' @return Invisibly \code{x} itself.
 #' @details The \code{print} methods for \code{optcheck} and \code{summary.optcheck} objects both display three-column matrix, consisting of the potential solution (\code{xsol}), the absolute difference between it and the optimal solution (\code{xopt}) return by either \code{\link{optim_proj}} and \code{\link{optim_refit}}, and the relative difference (\code{R = (xopt - xsol)/|xsol|}).  Only the elemnts corresponding to the top-\code{n} relative differences are displayed.
 #' @export
-print.optcheck <- function(x,
-                           digits = max(3L, getOption("digits")-3L),
-                           n = 5L) {
+print.optcheck <- function(x, digits = max(3L, getOption("digits")-3L),
+                           n = 5L, ...) {
   print(summary(x), digits = digits, n = n)
   invisible(x)
 }
@@ -19,7 +19,7 @@ print.optcheck <- function(x,
 #' @export
 print.summary.optcheck <- function(x,
                                    digits = max(3L, getOption("digits")-3L),
-                                   n = 5L) {
+                                   n = 5L, ...) {
   nx <- length(x$xsol)
   nmax <- min(nx, n)
   otype <- ifelse(x$maximize, "maximization", "minimization")
