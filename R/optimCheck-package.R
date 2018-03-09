@@ -32,6 +32,9 @@
 #' })
 #' oproj # see ?summary.optproj for more information
 #'
+#' # elementwise differences between potential and optimal solution
+#' diff(oproj) # same as summary(oproj)$xdiff
+#'
 #' # plot itself: see ?plot.optproj
 #' bnames <- parse(text = paste0("beta[", 1:p, "]"))
 #' plot(oproj, xnames = bnames,
