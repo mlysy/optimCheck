@@ -12,11 +12,28 @@ d <- 10 # number of dimensions
 
 A <- crossprod(rMnorm(d))
 b <- rnorm(d)
-loglik <- function(x) c(-crossprod(x, A %*% x) + 2 * crossprod(b, x))
+
+# x'Ax - 2 b'x
+objfun <- function(x) c(crossprod(x, A %*% x) - 2 * crossprod(b, x))
+
+xopt <- solve(A, b) # analytic solution
+
+# numerical solution using optim
+xfit <- optim(par = xopt * 5, fn = objfun,
+              control = list(maxit = 1e5))
+xfit$convergence
+
+oproj <- optim_proj(xsol = xfit$par, fun = objfun,
+                    maximize = FALSE, xrng = .5)
+plot(oproj)
+
+oproj
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 x.mle <- solve(A, b)
 
-fit <- optim(par = x.mle * 1.1, fn = loglik,
+fit <- optim(par = rep(0, d), fn = loglik,
              control = list(maxit = 1e5,
                             fnscale = -1,
                             parscale = abs(x.mle)))

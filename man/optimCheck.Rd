@@ -34,15 +34,17 @@ system.time({
   oproj <- optim_proj(xsol = bhat,
                       fun = function(beta) loglik(beta, y, X))
 })
-oproj # see ?summary.optproj for more information
-
-# elementwise differences between potential and optimal solution
-diff(oproj) # same as summary(oproj)$xdiff
 
 # plot itself: see ?plot.optproj
 bnames <- parse(text = paste0("beta[", 1:p, "]"))
 plot(oproj, xnames = bnames,
      xlab = "Coefficient", ylab = "Loglikelihood")
+
+# numerical summary
+oproj # see ?summary.optproj for more information
+
+# elementwise differences between potential and optimal solution
+diff(oproj) # same as summary(oproj)$xdiff
 
 # refit general purpose optimizer starting from bhat
 # often faster than optim_proj, but less stable

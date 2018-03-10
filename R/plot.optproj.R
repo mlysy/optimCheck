@@ -38,7 +38,7 @@ plot.optproj <- function(x, xnames, xind, equalize = TRUE,
   for(ii in 1:nx2) {
     ix <- xind[ii]
     if(equalize) {
-      xlim <- .equalize_lims(xout[,ix], yout[,ix], xsol[ix])
+      xlim <- .equalize_lims(xout[,ix], yout[,ix], xsol[ix], x$maximize)
       ylim <- xlim$ylim
       xlim <- xlim$xlim
     } else {
@@ -58,7 +58,8 @@ plot.optproj <- function(x, xnames, xind, equalize = TRUE,
 }
 
 # equalize plot limits
-.equalize_lims <- function(xseq, yval, xsoli) {
+.equalize_lims <- function(xseq, yval, xsoli, maximize) {
+  if(!maximize) yval <- -yval
   vth <- !is.na(yval) & yval > -Inf # valid values
   lth <- xseq < xsoli # on the left of solution
   rth <- xseq > xsoli # on the right
@@ -67,6 +68,7 @@ plot.optproj <- function(x, xnames, xind, equalize = TRUE,
   # rescale xseq to be on this range
   ibd <- c(which.min(ifelse(vth & lth, abs(yval-lbd), Inf)),
            which.min(ifelse(vth & rth, abs(yval-lbd), Inf)))
+  if(!maximize) yval <- -yval
   list(xlim = xseq[ibd],
        ylim = range(yval[ibd[1]:ibd[2]])) # new limits
 }
