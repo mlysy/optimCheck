@@ -9,10 +9,10 @@
 #' @export
 diff.optcheck <- function(x, ...) {
   xdiff <- summary(x)$xdiff
-  if(is.null(names(x$xsol))) {
-    # only add names if they are provided
-    colnames(xdiff) <- NULL
-  }
+  ## if(is.null(names(x$xsol))) {
+  ##   # only add names if they are provided
+  ##   rownames(xdiff) <- NULL
+  ## }
   xdiff
 }
 

@@ -1,6 +1,6 @@
 #--- test mclust ---------------------------------------------------------------
 
-context("Gaussian mixture models")
+context("Gaussian mixture models: projection plots")
 
 source("optimCheck-testfunctions.R")
 source("mclust-testfunctions.R")
@@ -47,3 +47,37 @@ test_that("mclust::emEEE converges to local mode.", {
   })
 })
 
+#-------------------------------------------------------------------------------
+
+context("Gaussian mixture models: \"refit\" with optim")
+
+ntest <- 5
+test_that("mclust::emEEE converges to local mode.", {
+  skip_if_not(requireNamespace("mclust", quietly = TRUE),
+              "mclust package required to run this test.")
+  require(mclust)
+  replicate(n = ntest, expr = {
+    G <- sample(2:4, 1) # number of components
+    d <- sample(2:4, 1) # number of dimensions
+    n <- sample(400:600,1) # number of observations
+    # simulate data
+    # true parameter values
+    parameters <- list(pro = rDirichlet(1, rep(1, G)),
+                       mean = rMnorm(d, G) + matrix(10 * 1:G, d, G,
+                                                    byrow = TRUE),
+                       variance = list(modelName = "EEE", d = d, G = G,
+                                       cholSigma = chol(crossprod(rMnorm(d)))))
+    y <- simEEE(parameters, n = n) # data
+    # calculate MLE
+    fit <- emEEE(data = y[,-1], parameters = parameters) # fit model
+    par.mle <- fit$parameters # convert parameters to MLE
+    par.mle$variance$cholSigma <- chol(par.mle$variance$Sigma)
+    theta.mle <- par2theta(par.mle)
+    # projection plots
+    ocheck <- optim_refit(fun = function(theta) {
+      loglik(theta, d, G, y[,-1])
+    }, xsol = theta.mle)
+    # largest of min(abs,rel) difference between xsol and xopt
+    expect_lt(max.xdiff(ocheck), .01)
+  })
+})

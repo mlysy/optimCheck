@@ -6,3 +6,4 @@
 *.dll
 *.pdf
 vignettes/.build.timestamp
+inst/doc
