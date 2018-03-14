@@ -20,4 +20,4 @@ devtools::install_github("mlysy/optimCheck")
 
 *Usage:*
 
-A quick tutorial is provided by the package [vignette](http://htmlpreview.github.com/?https://github.com/mlysy/optimCheck/master/inst/doc/optimCheck-quicktut.html).
+A quick tutorial is provided by the package [vignette](http://htmlpreview.github.io/?https://github.com/mlysy/optimCheck/master/inst/doc/optimCheck-quicktut.html).
