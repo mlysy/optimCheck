@@ -2,7 +2,7 @@
 % Please edit documentation in R/optim_refit.R
 \name{optim_refit}
 \alias{optim_refit}
-\title{Run an general-purpose optimizer starting from the potential solution.}
+\title{Refined optimization test.}
 \usage{
 optim_refit(xsol, fun, maximize = TRUE, maxit = 5000, reltol = 1e-08)
 }
@@ -13,9 +13,9 @@ optim_refit(xsol, fun, maximize = TRUE, maxit = 5000, reltol = 1e-08)
 
 \item{maximize}{Logical, whether a maximum or a minimum of the objective function is sought.}
 
-\item{maxit}{Maximum number of iterations for optimization algorithm (see Details).}
+\item{maxit}{Maximum number of iterations for second optimization (see Details).}
 
-\item{reltol}{Relative tolerance for convergence of optimization algorithm (see Details).}
+\item{reltol}{Relative tolerance for convergence of second optimization (see Details).}
 }
 \value{
 An object of class \code{optrefit} inheriting from \code{optcheck}, with elements:
@@ -28,7 +28,7 @@ An object of class \code{optrefit} inheriting from \code{optcheck}, with element
 }
 }
 \description{
-If the potential solution is equal or close to the optimum of the objective function, then an general-purpose optimization routine ought to converge to the true solution.
+If the potential solution is indeed a local optimum of the objective function, and if it is used to initialize a second optimization, then original and "refined" solutions ought to be close.
 }
 \details{
 This is simply a wrapper to the \code{\link[stats]{optim}} function using the Nelder-Mead method, with tuning to search for a high-precision solution when a good initial value is supplied (i.e., \code{xsol}).

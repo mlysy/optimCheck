@@ -1,12 +1,12 @@
-#' Run an general-purpose optimizer starting from the potential solution.
+#' Refined optimization test.
 #'
-#' If the potential solution is equal or close to the optimum of the objective function, then an general-purpose optimization routine ought to converge to the true solution.
+#' If the potential solution is indeed a local optimum of the objective function, and if it is used to initialize a second optimization, then original and "refined" solutions ought to be close.
 #'
 #' @param xsol Potential solution vector of length \code{nx}.
 #' @param fun Objective function to be maximized (or minimized), with first argument the length-\code{nx} parameter vector over which optimization is to take place.  Should return a scalar result.
 #' @param maximize Logical, whether a maximum or a minimum of the objective function is sought.
-#' @param maxit Maximum number of iterations for optimization algorithm (see Details).
-#' @param reltol Relative tolerance for convergence of optimization algorithm (see Details).
+#' @param maxit Maximum number of iterations for second optimization (see Details).
+#' @param reltol Relative tolerance for convergence of second optimization (see Details).
 #' @return An object of class \code{optrefit} inheriting from \code{optcheck}, with elements:
 #' \describe{
 #'   \item{\code{xsol}}{The potential solution.}

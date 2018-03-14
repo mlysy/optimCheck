@@ -2,7 +2,7 @@
 % Please edit documentation in R/optim_proj.R
 \name{optim_proj}
 \alias{optim_proj}
-\title{Calculates projection plots for a given objective function.}
+\title{Projection plot test.}
 \usage{
 optim_proj(xsol, fun, maximize = TRUE, xrng = 0.1, npts = 100)
 }

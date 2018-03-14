@@ -1,4 +1,4 @@
-#' Calculates projection plots for a given objective function.
+#' Projection plot test.
 #'
 #' Given the objective function of an optimization problem and a potential solution, calculates "projection plots" along each coordinate of the solution vector, with all other coordinates being fixed at the input values.
 #'

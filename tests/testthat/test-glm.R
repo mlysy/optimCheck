@@ -1,6 +1,6 @@
 #--- test glm ------------------------------------------------------------------
 
-context("Logistic regression")
+context("Logistic regression: projection plots")
 
 source("optimCheck-testfunctions.R")
 
@@ -30,6 +30,8 @@ test_that("glm/logistic converges according to optim_proj.", {
     expect_lt(max.xdiff(ocheck), .01)
   })
 })
+
+context("Logistic regression: \"refit\" with optim")
 
 test_that("glm/logistic converges according to optim_refit.", {
   replicate(ntest, {
