@@ -27,7 +27,7 @@ test_that("quantreg::rq converges to local mode", {
     beta.hat <- coef(M)
     ocheck <- optim_proj(fun = function(beta) {
       qr.obj(y = y, X = X, beta = beta, tau = tau)
-    }, xsol = beta.hat, maximize = FALSE)
+    }, xsol = beta.hat, maximize = FALSE, plot = FALSE)
     # largest of min(abs,rel) difference between xsol and xopt
     expect_lt(max.xdiff(ocheck), .01)
   })

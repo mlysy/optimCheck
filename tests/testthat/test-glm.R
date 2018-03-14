@@ -25,7 +25,7 @@ test_that("glm/logistic converges according to optim_proj.", {
     beta.hat <- coef(glm(y ~ X - 1, family = binomial))
     # check with optim_proj
     ocheck <- optim_proj(fun = function(beta) loglik(beta, y, X),
-                         xsol = beta.hat)
+                         xsol = beta.hat, plot = FALSE)
     # largest of min(abs,rel) difference between xsol and xopt
     expect_lt(max.xdiff(ocheck), .01)
   })

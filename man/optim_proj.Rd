@@ -4,7 +4,8 @@
 \alias{optim_proj}
 \title{Projection plot test.}
 \usage{
-optim_proj(xsol, fun, maximize = TRUE, xrng = 0.1, npts = 100)
+optim_proj(xsol, fun, maximize = TRUE, xrng = 0.1, npts = 100,
+  plot = TRUE, ...)
 }
 \arguments{
 \item{xsol}{Potential solution vector of length \code{nx}.}
@@ -16,9 +17,13 @@ optim_proj(xsol, fun, maximize = TRUE, xrng = 0.1, npts = 100)
 \item{xrng}{Optional specification of the range of each projection plot.  Can be: (i) a \code{2 x nx} matrix giving the endpoints of the range, (ii) a scalar or vector of length \code{nx}, such that the range in each plot is \code{theta +/- xrange * abs(theta)}.}
 
 \item{npts}{Number of points in each projection plot.}
+
+\item{plot}{Logical, whether or not to display the projection plots or just return their contents.}
+
+\item{...}{Further arguments to pass to the \code{plot} method (see \code{\link{plot.optproj}}).}
 }
 \value{
-An object of class \code{optproj} inheriting from \code{optcheck}, with elements:
+An object of class \code{optproj} inheriting from \code{optcheck} (returned invisibly if \code{plot = TRUE}, with elements:
 \describe{
   \item{\code{xsol}}{The potential solution.}
   \item{\code{ysol}}{The value of \code{fun(xsol)}.}
@@ -31,5 +36,5 @@ An object of class \code{optproj} inheriting from \code{optcheck}, with elements
 Given the objective function of an optimization problem and a potential solution, calculates "projection plots" along each coordinate of the solution vector, with all other coordinates being fixed at the input values.
 }
 \seealso{
-\code{\link{summary.optproj}}, \code{\link{print.optproj}}, and \code{\link{diff.optproj}} for \code{summary}, \code{print}, and \code{diff} methods.
+\code{plot}, \code{summary}, \code{print}, and \code{diff} methods for projection plots are available; see \code{plot.optproj}, \code{\link{summary.optproj}}, \code{\link{print.optproj}}, and \code{\link{diff.optproj}}.
 }

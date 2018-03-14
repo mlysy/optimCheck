@@ -27,14 +27,13 @@ xfit$convergence
 ## ---- fig.width = 10, fig.height = 6, out.width = "97%"------------------
 require(optimCheck) # load package
 
-# calculate the projection plots
-oproj <- optim_proj(fun = objfun,        # objective function
-                    xsol = xfit$par,     # potential solution
-                    maximize = FALSE,    # indicates that a local minimum is sought
-                    xrng = .5)           # range of projection plot: x_i +/- .5*|x_i|
-# plot it
-xnames <- parse(text = paste0("x[", 1:d, "]"))
-plot(oproj, xnames = xnames, equalize = FALSE)
+# projection plots
+xnames <- parse(text = paste0("x[", 1:d, "]")) # variable names
+oproj <- optim_proj(fun = objfun,              # objective function
+                    xsol = xfit$par,           # potential solution
+                    maximize = FALSE,          # indicates that a local minimum is sought
+                    xrng = .5,                 # range of projection plot: x_i +/- .5*|x_i|
+                    xnames = xnames)
 
 
 ## ------------------------------------------------------------------------
@@ -60,13 +59,14 @@ summary(orefit) # same print method as orefit
 
 ## ---- fig.width = 10, fig.height = 6, out.width = "97%"------------------
 # projection plots with refined solution
-plot(optim_proj(xsol = orefit$xopt, fun = objfun,
-                xrng = .5, maximize = FALSE), equalize = FALSE)
+optim_proj(xsol = orefit$xopt, fun = objfun,
+           xrng = .5, maximize = FALSE)
 
 ## ------------------------------------------------------------------------
 orefit2 <- optim_refit(fun = objfun,
                        xsol = xhat * 1.1,
                        maximize = FALSE)
 # numerical project plot test
-optim_proj(xsol = orefit2$xopt, fun = objfun, xrng = .5, maximize = FALSE)
+optim_proj(xsol = orefit2$xopt, fun = objfun,
+           xrng = .5, maximize = FALSE, plot = FALSE)
 

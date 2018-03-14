@@ -34,5 +34,5 @@ If the potential solution is indeed a local optimum of the objective function, a
 This is simply a wrapper to the \code{\link[stats]{optim}} function using the Nelder-Mead method, with tuning to search for a high-precision solution when a good initial value is supplied (i.e., \code{xsol}).
 }
 \seealso{
-\code{\link{summary.optrefit}}, \code{\link{print.optrefit}}, and \code{\link{diff.optrefit}} for \code{summary}, \code{print}, and \code{diff} methods.
+\code{summary}, \code{print}, and \code{diff} for \code{optrefit} objects are available; see \code{\link{summary.optrefit}}, \code{\link{print.optrefit}}, and \code{\link{diff.optrefit}}.
 }

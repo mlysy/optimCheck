@@ -30,15 +30,13 @@ loglik <- function(beta, y, X) {
 }
 
 # projection plots
+bnames <- parse(text = paste0("beta[", 1:p, "]"))
 system.time({
   oproj <- optim_proj(xsol = bhat,
-                      fun = function(beta) loglik(beta, y, X))
+                      fun = function(beta) loglik(beta, y, X),
+                      xnames = bnames,
+                      xlab = "Coefficient", ylab = "Loglikelihood")
 })
-
-# plot itself: see ?plot.optproj
-bnames <- parse(text = paste0("beta[", 1:p, "]"))
-plot(oproj, xnames = bnames,
-     xlab = "Coefficient", ylab = "Loglikelihood")
 
 # numerical summary
 oproj # see ?summary.optproj for more information

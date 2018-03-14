@@ -4,7 +4,7 @@
 \alias{plot.optproj}
 \title{Projection plots for optimization routines.}
 \usage{
-\method{plot}{optproj}(x, xnames, xind, equalize = TRUE, layout, xlab, ylab,
+\method{plot}{optproj}(x, xnames, xind, equalize = FALSE, layout, xlab, ylab,
   ...)
 }
 \arguments{
