@@ -9,7 +9,7 @@
 #' @param ... Further arguments to be passed to or from other methods.
 #' @return A grid of projection plots, with vertical lines at the potential solution.
 #' @export
-plot.optproj <- function(x, xnames, xind, equalize = TRUE,
+plot.optproj <- function(x, xnames, xind, equalize = FALSE,
                          layout, xlab, ylab, ...) {
   xsol <- x$xsol
   nx <- length(xsol)
