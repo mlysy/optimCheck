@@ -63,10 +63,22 @@ optim_proj(xsol = orefit$xopt, fun = objfun,
            xrng = .5, maximize = FALSE)
 
 ## ------------------------------------------------------------------------
+# gradient of the objective function
+objgrad <- function(x) 2 * drop(A %*% x - b)
+
+# mode-finding using quasi-Newton method
+xfit2 <- optim(fn = objfun,                    # objective function
+               gr = objgrad,                   # gradient
+               par = xfit$par,                 # initial value (first optim fit)
+               method = "BFGS")
+
+# external refit test with optimizer of choice
 orefit2 <- optim_refit(fun = objfun,
-                       xsol = xhat * 1.1,
+                       xsol = xfit$par,        # initial value (first optim fit)
+                       xopt = xfit2$par,       # refit value (2nd fit with quasi-Newton method
                        maximize = FALSE)
-# numerical project plot test
+
+# project plot test on refit solution
 optim_proj(xsol = orefit2$xopt, fun = objfun,
            xrng = .5, maximize = FALSE, plot = FALSE)
 

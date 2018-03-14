@@ -4,7 +4,8 @@
 \alias{optim_refit}
 \title{Refined optimization test.}
 \usage{
-optim_refit(xsol, fun, maximize = TRUE, maxit = 5000, reltol = 1e-08)
+optim_refit(xsol, fun, maximize = TRUE, maxit = 5000, reltol = 1e-08,
+  xopt)
 }
 \arguments{
 \item{xsol}{Potential solution vector of length \code{nx}.}
@@ -13,9 +14,11 @@ optim_refit(xsol, fun, maximize = TRUE, maxit = 5000, reltol = 1e-08)
 
 \item{maximize}{Logical, whether a maximum or a minimum of the objective function is sought.}
 
-\item{maxit}{Maximum number of iterations for second optimization (see Details).}
+\item{maxit}{Maximum number of iterations for \code{\link[stats]{optim}} refit (see Details).}
 
-\item{reltol}{Relative tolerance for convergence of second optimization (see Details).}
+\item{reltol}{Relative tolerance for convergence of \code{\link[stats]{optim}} refit (see Details).}
+
+\item{xopt}{Optional refit solution calculated externally from an optimization algorithm of choice (see Details).}
 }
 \value{
 An object of class \code{optrefit} inheriting from \code{optcheck}, with elements:
@@ -31,7 +34,9 @@ An object of class \code{optrefit} inheriting from \code{optcheck}, with element
 If the potential solution is indeed a local optimum of the objective function, and if it is used to initialize a second optimization, then original and "refined" solutions ought to be close.
 }
 \details{
-This is simply a wrapper to the \code{\link[stats]{optim}} function using the Nelder-Mead method, with tuning to search for a high-precision solution when a good initial value is supplied (i.e., \code{xsol}).
+By default, a so-called **refi**ned op(**t**)imization (or refit) test is performed by running the default Nelder-Mead simplex method provided by \code{\link[stats]{optim}}, initialized by the potential solution \code{xsol}.  Only a simplified interface to \code{\link[stats]{optim}}'s control parameters are provided here.
+
+Alternatively, the refit test can be performed with any optimization algorithm of choice.  This is done externally, with the refined solution passed to \code{optim_refit} via the argument \code{xopt}.
 }
 \seealso{
 \code{summary}, \code{print}, and \code{diff} for \code{optrefit} objects are available; see \code{\link{summary.optrefit}}, \code{\link{print.optrefit}}, and \code{\link{diff.optrefit}}.

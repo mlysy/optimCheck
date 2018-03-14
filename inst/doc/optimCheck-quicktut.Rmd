@@ -131,18 +131,32 @@ orefit <- optim_refit(fun = objfun,        # objective function
                       maximize = FALSE)    # indicates that a local minimum is sought
 summary(orefit) # same print method as orefit
 ```
-Thus we can see that the first and second run of `optim` are quite different. However, this does not mean that the refit optimization is now at the mode: 
+Thus we can see that the first and second run of `optim` are quite different. 
+
+Of course, this does not mean that the refit solution produced by `optim` is a local mode:
 ```{r, fig.width = 10, fig.height = 6, out.width = "97%"}
 # projection plots with refined solution
 optim_proj(xsol = orefit$xopt, fun = objfun,
            xrng = .5, maximize = FALSE)
 ```
-On the other hand, starting closer to the true solution $\hat \xx = \AA^{-1}\bb$ does result in a better second ift
+Indeed, the default `optim` method is only accurate when initialized close to the optimal solution.  Therefore, one may wish to run the refit test with a different optimizer.  This can be done externally to `optim_refit`, prior to passing the refit solution to the function via its argument `xopt`.  This is illustrated below using `optim`'s gradient-based quasi-Newton method:
 ```{r}
+# gradient of the objective function
+objgrad <- function(x) 2 * drop(A %*% x - b)
+
+# mode-finding using quasi-Newton method
+xfit2 <- optim(fn = objfun,                    # objective function
+               gr = objgrad,                   # gradient
+               par = xfit$par,                 # initial value (first optim fit)
+               method = "BFGS")
+
+# external refit test with optimizer of choice
 orefit2 <- optim_refit(fun = objfun,
-                       xsol = xhat * 1.1,
+                       xsol = xfit$par,        # initial value (first optim fit)
+                       xopt = xfit2$par,       # refit value (2nd fit with quasi-Newton method
                        maximize = FALSE)
-# numerical project plot test
+
+# project plot test on refit solution
 optim_proj(xsol = orefit2$xopt, fun = objfun,
            xrng = .5, maximize = FALSE, plot = FALSE)
 ```
