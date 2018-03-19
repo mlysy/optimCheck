@@ -30,7 +30,7 @@ optim_proj <- function(xsol, fun, maximize = TRUE, xrng = .1,
     xrng <- xrng * abs(xsol)
     xrng <- rbind(xsol - xrng, xsol + xrng)
   } else {
-    if(!identical(dim(xrng), c(2,nx))) {
+    if(!all(dim(xrng) == c(2,nx))) {
       stop("xrng must be a scalar, vector of length(xsol), or a 2 x length(xsol) matrix.")
     }
   }
