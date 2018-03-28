@@ -102,7 +102,7 @@ xopt <- summary(oproj)$xopt # optimal solution in each projection plot
 xdiff <- cbind(abs = xopt-xsol, rel = (xopt-xsol)/abs(xsol))
 range(xdiff - diff(oproj))
 ```
-Thus it is proposed that a combination of `summary` and `diff` methods for projection plots can be useful for constructing automated unit tests.  In this case, plotting itself can be disable by passing `optim_proj` the argument `plot = FALSE`.  See the **`optimCheck/tests`** folder for **`testthat`** examples featuring: 
+Thus it is proposed that a combination of `summary` and `diff` methods for projection plots can be useful for constructing automated unit tests.  In this case, plotting itself can be disabled by passing `optim_proj` the argument `plot = FALSE`.  See the **`optimCheck/tests`** folder for **`testthat`** examples featuring: 
 
 - Logistic Regression (`glm` function).
 - Quantile Regression (`rq` function in [**`quantreg`**](https://cran.r-project.org/web/packages/quantreg/index.html))
