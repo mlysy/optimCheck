@@ -22,6 +22,8 @@ rmarkdown::render("optimCheck-quicktut.Rmd") # R code to render vignette
 
 <!-- latex macros -->
 \newcommand{\xx}{\boldsymbol{x}}
+\newcommand{\hxx}{\hat{\boldsymbol{x}}}
+\newcommand{\txx}{\tilde{\boldsymbol{x}}}
 \newcommand{\bb}{\boldsymbol{b}}
 \renewcommand{\AA}{\boldsymbol{A}}
 
@@ -35,9 +37,9 @@ A brief overview of the package functionality is illustrated with the following 
 $$
 Q(\xx) = \xx'\AA\xx - 2 \bb'\xx
 $$
-denote a quadratic objective function in $\xx \in \mathbb R^d$.  If $\AA_{d \times d}$ is a positive-definite matrix, then the unique minimum of $Q(\xx)$ is $\hat \xx = \AA^{-1}\bb$.  Let us now ignore this information and try to minimize $Q(\xx)$ using **R**'s simplest built-in mode-finding routine, provided by the **R** function `optim`.
+denote a quadratic objective function in $\xx \in \mathbb R^d$.  If $\AA_{d \times d}$ is a positive-definite matrix, then the unique minimum of $Q(\xx)$ is $\hxx = \AA^{-1}\bb$.  Let us now ignore this information and try to minimize $Q(\xx)$ using **R**'s simplest built-in mode-finding routine, provided by the **R** function `optim`.
 
-In its simplest configuration, `optim` requires only the objective function and a starting value $\xx_0$ to initialize the mode-finding procedure.  Let's consider a difficult setting for `optim`, with a relatively large $d = 12$ and a starting value $\xx_0$ which is far from the optimal value $\hat \xx$.
+In its simplest configuration, `optim` requires only the objective function and a starting value $\xx_0$ to initialize the mode-finding procedure.  Let's consider a difficult setting for `optim`, with a relatively large $d = 12$ and a starting value $\xx_0$ which is far from the optimal value $\hxx$.
 ```{r, echo = -1}
 set.seed(2608) # set seed to fix output
 d <- 12 # dimension of optimization problem
@@ -63,11 +65,11 @@ Like most solvers, `optim` utilizes various criteria to determine whether its al
 # any value other than 0 means optim failed to converge
 xfit$convergence 
 ```
-Here `optim` reports that its algorithm has converged.  Now let's check this visually with **`optimCheck`** using *projection plots*.  That is, let $\tilde \xx$ denote the potential optimum of $Q(\xx)$.  Then for each $i = 1,\ldots,d$, we plot 
+Here `optim` reports that its algorithm has converged.  Now let's check this visually with **`optimCheck`** using *projection plots*.  That is, let $\txx$ denote the potential optimum of $Q(\xx)$.  Then for each $i = 1,\ldots,d$, we plot 
 $$
-Q_i(x_i) = Q(x_i, \tilde \xx_{-i}), \qquad \tilde \xx_{-i} = (\tilde x_1, \ldots, \tilde x_{i-1}, \tilde x_{i+1}, \ldots, \tilde x_d).
+Q_i(x_i) = Q(x_i, \txx_{-i}), \qquad \txx_{-i} = (\tilde x_1, \ldots, \tilde x_{i-1}, \tilde x_{i+1}, \ldots, \tilde x_d).
 $$
-In other words, projection plot $i$ varies only $x_i$, while holding all other elements of $\xx$ fixed at the value of the potential solution $\tilde \xx$.  These plots are produced with the **`optimCheck`** function `optim_proj`:
+In other words, projection plot $i$ varies only $x_i$, while holding all other elements of $\xx$ fixed at the value of the potential solution $\txx$.  These plots are produced with the **`optimCheck`** function `optim_proj`:
 ```{r, fig.width = 10, fig.height = 6, out.width = "97%"}
 require(optimCheck) # load package
 
@@ -92,7 +94,7 @@ As described in the function documentation, `xproj` and `yproj` are matrices of 
 ```{r}
 oproj # same print method as summary(oproj)
 ```
-The documentation for `summary.optproj` describes the various calculations it provides.  Perhaps the most useful of these are the elementwise absolute and relative differences between the potential solution $\tilde \xx$ and $\hat \xx_\mathrm{proj}$, the vector of optimal 1D solutions in each projection plot. For convenience, these can be extracted with the `diff` method:
+The documentation for `summary.optproj` describes the various calculations it provides.  Perhaps the most useful of these are the elementwise absolute and relative differences between the potential solution $\tilde{\xx}$ and $\hxx_\mathrm{proj}$, the vector of optimal 1D solutions in each projection plot. For convenience, these can be extracted with the `diff` method:
 ```{r}
 diff(oproj) # equivalent to summary(oproj)$xdiff
 
