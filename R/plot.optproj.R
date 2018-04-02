@@ -42,8 +42,8 @@ plot.optproj <- function(x, xnames, xind, equalize = FALSE,
       ylim <- xlim$ylim
       xlim <- xlim$xlim
     } else {
-      xlim <- range(xout[,ix])
-      ylim <- range(yout[,ix])
+      xlim <- range(xout[,ix], na.rm = TRUE, finite = TRUE)
+      ylim <- range(yout[,ix], na.rm = TRUE, finite = TRUE)
     }
     plot(xout[,ix], yout[,ix], type = "l", main = xnames[ix],
          xlim = xlim, ylim = ylim, xlab = "", ylab = "")
@@ -70,5 +70,5 @@ plot.optproj <- function(x, xnames, xind, equalize = FALSE,
            which.min(ifelse(vth & rth, abs(yval-lbd), Inf)))
   if(!maximize) yval <- -yval
   list(xlim = xseq[ibd],
-       ylim = range(yval[ibd[1]:ibd[2]])) # new limits
+       ylim = range(yval[ibd[1]:ibd[2]], na.rm = TRUE)) # new limits
 }
