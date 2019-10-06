@@ -7,7 +7,6 @@
 \alias{diff.summary.optproj}
 \alias{diff.optrefit}
 \alias{diff.summary.optrefit}
-\alias{diff.summary.optcheck}
 \title{Elementwise difference between potential and optimal solutions.}
 \usage{
 \method{diff}{optcheck}(x, ...)

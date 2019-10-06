@@ -1,3 +1,5 @@
+Meta
+doc
 *.DS_Store
 *.Rapp.history
 *.Rhistory
@@ -6,5 +8,3 @@
 *.dll
 *.pdf
 vignettes/.build.timestamp
-vignettes/optimCheck-quicktut_cache
-vignettes/optimCheck-quicktut_files

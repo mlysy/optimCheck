@@ -7,14 +7,13 @@
 \alias{print.summary.optproj}
 \alias{print.optrefit}
 \alias{print.summary.optrefit}
-\alias{print.summary.optcheck}
 \title{Print method for \code{optcheck} and \code{summary.optcheck} objects.}
 \usage{
 \method{print}{optcheck}(x, digits = max(3L, getOption("digits") - 3L),
   n = 5L, ...)
 
-\method{print}{summary.optcheck}(x, digits = max(3L, getOption("digits") -
-  3L), n = 5L, ...)
+\method{print}{summary.optcheck}(x, digits = max(3L, getOption("digits")
+  - 3L), n = 5L, ...)
 }
 \arguments{
 \item{x}{Object of class \code{optcheck} or \code{summary.optcheck}, currently returned by \code{\link{optim_proj}}, \code{\link{optim_refit}}, or a summary of either of those calls.}
