@@ -60,3 +60,7 @@ Useful links:
 }
 
 }
+\author{
+\strong{Maintainer}: Martin Lysy \email{mlysy@uwaterloo.ca}
+
+}
