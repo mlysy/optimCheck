@@ -3,3 +3,4 @@
 ^LICENSE$
 ^README.md$
 ^tests/dontrun$
+^man-roxygen$

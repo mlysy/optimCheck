@@ -1,8 +1,8 @@
 #' Print method for `optcheck` and `summary.optcheck` objects.
 #'
-#' @name print.optcheck
 #' @aliases print.summary.optcheck print.optproj print.summary.optproj print.optrefit print.summary.optrefit
-#' @param x Object of class `optcheck` or `summary.optcheck`, currently returned by [optim_proj()], [optim_refit()], or a summary of either of those calls.
+#'
+#' @template param_x
 #' @param digits Number of digits to display.
 #' @param n Number of elements of solution vector to display (see Details).
 #' @param ... Further arguments to be passed to or from other methods.

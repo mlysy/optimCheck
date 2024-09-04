@@ -2,9 +2,9 @@
 #'
 #' If the potential solution is indeed a local optimum of the objective function, and if it is used to initialize a second optimization, then original and "refined" solutions ought to be close.
 #'
-#' @param xsol Potential solution vector of length `nx`.
-#' @param fun Objective function to be maximized (or minimized), with first argument the length-`nx` parameter vector over which optimization is to take place.  Should return a scalar result.
-#' @param maximize Logical, whether a maximum or a minimum of the objective function is sought.
+#' @template param_xsol
+#' @template param_fun
+#' @template param_maximize
 #' @param maxit Maximum number of iterations for [stats::optim()] refit (see Details).
 #' @param reltol Relative tolerance for convergence of [stats::optim()] refit (see Details).
 #' @param xopt Optional refit solution calculated externally from an optimization algorithm of choice (see Details).

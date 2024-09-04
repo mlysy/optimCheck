@@ -1,8 +1,8 @@
 #' `summary` method for projection plots.
 #'
 #' @param object An `optproj` object, i.e., output from the function [optim_proj()].
-#' @param xnames Optional vector of names for the elements of the potential solution.
-#' @param ... Further arguments to be passed to or from other methods.
+#' @template param_xnames
+#' @template param_dots
 #' @return An object of class `summary.optproj` inheriting from `summary.optcheck`, with elements:
 #' \describe{
 #'   \item{`xsol`}{The potential solution vector.}

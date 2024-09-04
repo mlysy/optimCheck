@@ -1,8 +1,8 @@
 #' `summary` method for `optrefit` objects.
 #'
 #' @param object An `optrefit` object, i.e., output from the function [optim_refit()].
-#' @param xnames Optional vector of names for the elements of the potential solution.
-#' @param ... Further arguments to be passed to or from other methods.
+#' @template param_xnames
+#' @template param_dots
 #' @return An object of class `summary.optrefit` inheriting from `summary.optcheck`, with elements:
 #' \describe{
 #'   \item{`xsol`}{The potential solution vector.}

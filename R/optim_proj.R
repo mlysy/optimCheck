@@ -2,9 +2,9 @@
 #'
 #' Given the objective function of an optimization problem and a potential solution, calculates "projection plots" along each coordinate of the solution vector, with all other coordinates being fixed at the input values.
 #'
-#' @param xsol Potential solution vector of length `nx`.
-#' @param fun Objective function to be maximized (or minimized), with first argument the length-`nx` parameter vector over which optimization is to take place.  Should return a scalar result.
-#' @param maximize Logical, whether a maximum or a minimum of the objective function is sought.
+#' @template param_xsol
+#' @template param_fun
+#' @template param_maximize
 #' @param xrng Optional specification of the range of each projection plot.  Can be: (i) a `2 x nx` matrix giving the endpoints of the range, (ii) a scalar or vector of length `nx`, such that the range in each plot is `theta +/- xrange * abs(theta)`.
 #' @param npts Number of points in each projection plot.
 #' @param plot Logical, whether or not to display the projection plots or just return their contents.

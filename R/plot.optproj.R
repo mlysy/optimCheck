@@ -1,12 +1,12 @@
 #' Projection plots for optimization routines.
 #'
 #' @param x An `optproj` object, i.e., output from function [optim_proj()].
-#' @param xnames Optional vector of element names of potential solution for plot titles.
+#' @param xnames Optional vector of names for the plot titles.
 #' @param xind Integer or logical vector of indices indicating which projections should be plotted.  Defaults to all projection plots.
 #' @param equalize If `TRUE`, narrows the range in each projection plot such that the y-value is more or less the same at either endpoint.
 #' @param layout Optional vector giving the number of rows and columns in the plot layout.  For `nx` plots, defaults to `c(nr, nc)`, where `nr = floor(nx)` and `nc = ceiling(nx/nr)`.
 #' @param xlab,ylab Outer x-axis and y-axis labels.
-#' @param ... Further arguments to be passed to or from other methods.
+#' @template param_dots
 #' @return A grid of projection plots, with vertical lines at the potential solution.
 #' @export
 plot.optproj <- function(x, xnames, xind, equalize = FALSE,
