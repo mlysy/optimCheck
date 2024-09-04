@@ -1,9 +1,9 @@
 context("Quantile regression")
 
-source("optimCheck-testfunctions.R")
+## source("optimCheck-testfunctions.R")
 
 # quantile regression objective function
-qr.obj <- function(y, X, beta, tau) {
+qr_obj <- function(y, X, beta, tau) {
   u <- y - c(X %*% beta)
   sum(u * (tau - (u < 0)))
 }
@@ -24,11 +24,11 @@ test_that("quantreg::rq converges to local mode", {
     ds <- data.frame(y = y, X)
     tau <- runif(1)
     M <- rq(y ~ . - 1, tau = tau, data = ds)
-    beta.hat <- coef(M)
+    beta_hat <- coef(M)
     ocheck <- optim_proj(fun = function(beta) {
-      qr.obj(y = y, X = X, beta = beta, tau = tau)
-    }, xsol = beta.hat, maximize = FALSE, plot = FALSE)
+      qr_obj(y = y, X = X, beta = beta, tau = tau)
+    }, xsol = beta_hat, maximize = FALSE, plot = FALSE)
     # largest of min(abs,rel) difference between xsol and xopt
-    expect_lt(max.xdiff(ocheck), .01)
+    expect_lt(max_xdiff(ocheck), .01)
   })
 })

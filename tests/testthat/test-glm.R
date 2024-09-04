@@ -2,7 +2,7 @@
 
 context("Logistic regression: projection plots")
 
-source("optimCheck-testfunctions.R")
+## source("optimCheck-testfunctions.R")
 
 # likelihood function
 loglik <- function(beta, y, X) {
@@ -22,12 +22,12 @@ test_that("glm/logistic converges according to optim_proj.", {
     # response
     y <- rbinom(n, size = 1, prob = binomial()$linkinv(X %*% beta0))
     # fit glm
-    beta.hat <- coef(glm(y ~ X - 1, family = binomial))
+    beta_hat <- coef(glm(y ~ X - 1, family = binomial))
     # check with optim_proj
     ocheck <- optim_proj(fun = function(beta) loglik(beta, y, X),
-                         xsol = beta.hat, plot = FALSE)
+                         xsol = beta_hat, plot = FALSE)
     # largest of min(abs,rel) difference between xsol and xopt
-    expect_lt(max.xdiff(ocheck), .01)
+    expect_lt(max_xdiff(ocheck), .01)
   })
 })
 
@@ -43,12 +43,12 @@ test_that("glm/logistic converges according to optim_refit.", {
     # response
     y <- rbinom(n, size = 1, prob = binomial()$linkinv(X %*% beta0))
     # fit glm
-    beta.hat <- coef(glm(y ~ X - 1, family = binomial))
+    beta_hat <- coef(glm(y ~ X - 1, family = binomial))
     # check with optim_proj
     ocheck <- optim_refit(fun = function(beta) loglik(beta, y, X),
-                          xsol = beta.hat)
+                          xsol = beta_hat)
     # largest of min(abs,rel) difference between xsol and xopt
-    expect_lt(max.xdiff(ocheck), .01)
+    expect_lt(max_xdiff(ocheck), .01)
   })
 })
 

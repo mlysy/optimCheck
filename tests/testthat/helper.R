@@ -1,3 +1,17 @@
+set.seed(2024) # fix seed for randomized tests
+
+# generate an n x p matrix of iid N(0,1)
+rMnorm <- function(n, p) {
+  if(missing(p)) p <- n
+  matrix(rnorm(n*p), n, p)
+}
+
+# max of min of abs and rel error
+max_xdiff <- function(x) {
+  xdiff <- abs(diff(x))
+  max(pmin(xdiff[,1], xdiff[,2]))
+}
+
 
 # simulate random vector(s) from dirichlet distribution
 rDirichlet <- function(n, alpha) {
@@ -9,10 +23,9 @@ rDirichlet <- function(n, alpha) {
 # convert back and forth between "flattened" parameter representation,
 # i.e., theta = c(pro[-G], mean, upper.tri(variance))
 par2theta <- function(parameters) {
+  flat_tri <- function(cs) cs[upper.tri(cs, diag = TRUE)]
   c(parameters$pro[-length(parameters$pro)],
-    parameters$mean, { # lambda function
-      function(cs) cs[upper.tri(cs, diag = TRUE)]
-    } (parameters$variance$cholSigma))
+    parameters$mean, flat_tri(parameters$variance$cholSigma))
 }
 
 theta2par <- function(theta, d, G) {
@@ -28,7 +41,7 @@ theta2par <- function(theta, d, G) {
 }
 
 # parameter names
-theta.names <- function(d, G) {
+theta_names <- function(d, G) {
   rho <- paste0("rho[", 1:(G-1), "]")
   ind <- as.matrix(expand.grid(d = 1:d, G = 1:G))
   mu <- paste0("mu[", ind[,"d"], ind[,"G"], "]")
