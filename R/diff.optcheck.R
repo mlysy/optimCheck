@@ -2,10 +2,10 @@
 #'
 #' @name diff.optcheck
 #' @aliases diff.summary.optcheck diff.optproj diff.summary.optproj diff.optrefit  diff.summary.optrefit
-#' @param x Object of class \code{optcheck} or \code{summary.optcheck}, currently returned by \code{\link{optim_proj}}, \code{\link{optim_refit}}, or a summary of either of those calls.
+#' @param x Object of class `optcheck` or `summary.optcheck`, currently returned by [optim_proj()], [optim_refit()], or a summary of either of those calls.
 #' @param ... Further arguments to be passed to or from other methods.
-#' @return A two-column matrix consisting of the absolute and relative differences between the potential and optimal solutions (\code{xsol} and \code{xopt}).
-#' @details This function is simply a wrapper to \code{summary(x)$xdiff} and \code{x$xdiff}, for \code{optcheck} and \code{summary.optcheck} objects respectively.
+#' @return A two-column matrix consisting of the absolute and relative differences between the potential and optimal solutions (`xsol` and `xopt`).
+#' @details This function is simply a wrapper to `summary(x)$xdiff` and `x$xdiff`, for `optcheck` and `summary.optcheck` objects respectively.
 #' @export
 diff.optcheck <- function(x, ...) {
   xdiff <- summary(x)$xdiff

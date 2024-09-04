@@ -1,7 +1,5 @@
 #' Graphical and numerical checks for mode-finding routines.
 #'
-#' @name optimCheck
-#' @docType package
 #' @importFrom graphics abline mtext par plot
 #' @importFrom stats optim
 #' @examples
@@ -47,5 +45,5 @@
 #'                         fun = function(beta) loglik(beta, y, X))
 #' })
 #' orefit
-NULL
+"_PACKAGE"
 

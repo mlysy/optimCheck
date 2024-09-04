@@ -1,4 +1,4 @@
-# optimCheck: Graphical and numerical checks for mode-finding routines**
+# optimCheck: Graphical and numerical checks for mode-finding routines
 
 *Martin Lysy*
 

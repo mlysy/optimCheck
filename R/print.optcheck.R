@@ -1,13 +1,13 @@
-#' Print method for \code{optcheck} and \code{summary.optcheck} objects.
+#' Print method for `optcheck` and `summary.optcheck` objects.
 #'
 #' @name print.optcheck
 #' @aliases print.summary.optcheck print.optproj print.summary.optproj print.optrefit print.summary.optrefit
-#' @param x Object of class \code{optcheck} or \code{summary.optcheck}, currently returned by \code{\link{optim_proj}}, \code{\link{optim_refit}}, or a summary of either of those calls.
+#' @param x Object of class `optcheck` or `summary.optcheck`, currently returned by [optim_proj()], [optim_refit()], or a summary of either of those calls.
 #' @param digits Number of digits to display.
 #' @param n Number of elements of solution vector to display (see Details).
 #' @param ... Further arguments to be passed to or from other methods.
-#' @return Invisibly \code{x} itself.
-#' @details The \code{print} methods for \code{optcheck} and \code{summary.optcheck} objects both display three-column matrix, consisting of the potential solution (\code{xsol}), the absolute difference between it and the optimal solution (\code{xopt}) return by either \code{\link{optim_proj}} and \code{\link{optim_refit}}, and the relative difference (\code{R = (xopt - xsol)/|xsol|}).  Only the elemnts corresponding to the top-\code{n} relative differences are displayed.
+#' @return Invisibly `x` itself.
+#' @details The `print` methods for `optcheck` and `summary.optcheck` objects both display three-column matrix, consisting of the potential solution (`xsol`), the absolute difference between it and the optimal solution (`xopt`) return by either [optim_proj()] and [optim_refit()], and the relative difference (`R = (xopt - xsol)/|xsol|`).  Only the elemnts corresponding to the top-`n` relative differences are displayed.
 #' @export
 print.optcheck <- function(x, digits = max(3L, getOption("digits")-3L),
                            n = 5L, ...) {

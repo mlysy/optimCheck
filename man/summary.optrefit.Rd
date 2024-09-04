@@ -7,7 +7,7 @@
 \method{summary}{optrefit}(object, xnames, ...)
 }
 \arguments{
-\item{object}{An \code{optrefit} object, i.e., output from the function \code{\link{optim_refit}}.}
+\item{object}{An \code{optrefit} object, i.e., output from the function \code{\link[=optim_refit]{optim_refit()}}.}
 
 \item{xnames}{Optional vector of names for the elements of the potential solution.}
 
@@ -16,18 +16,18 @@
 \value{
 An object of class \code{summary.optrefit} inheriting from \code{summary.optcheck}, with elements:
 \describe{
-  \item{\code{xsol}}{The potential solution vector.}
-  \item{\code{ysol}}{The value of the objective function at \code{xsol}.}
-  \item{\code{maximize}}{Logical indicating whether the potential solution should maximize or minimize the objective function.}
-  \item{\code{xopt}}{A vector containing the argmax/argmin in each projection plot.}
-  \item{\code{yopt}}{The scalar value of the max/min found by \code{optim_refit}.}
-  \item{\code{xdiff}}{A two-column matrix containing the differences between \code{xsol} and \code{xopt}.  The first column is the absolute difference \code{D = xopt - xsol}, the second is the relative difference \code{R = D/|xsol|}.}
-  \item{\code{ydiff}}{A length-two vector containing the absolute and relative difference between \code{ysol} and \code{yopt}.}
+\item{\code{xsol}}{The potential solution vector.}
+\item{\code{ysol}}{The value of the objective function at \code{xsol}.}
+\item{\code{maximize}}{Logical indicating whether the potential solution should maximize or minimize the objective function.}
+\item{\code{xopt}}{A vector containing the argmax/argmin in each projection plot.}
+\item{\code{yopt}}{The scalar value of the max/min found by \code{optim_refit}.}
+\item{\code{xdiff}}{A two-column matrix containing the differences between \code{xsol} and \code{xopt}.  The first column is the absolute difference \code{D = xopt - xsol}, the second is the relative difference \verb{R = D/|xsol|}.}
+\item{\code{ydiff}}{A length-two vector containing the absolute and relative difference between \code{ysol} and \code{yopt}.}
 }
 }
 \description{
 \code{summary} method for \code{optrefit} objects.
 }
 \seealso{
-\code{\link{print.summary.optcheck}} for \code{print} method.
+\code{\link[=print.summary.optcheck]{print.summary.optcheck()}} for \code{print} method.
 }

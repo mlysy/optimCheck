@@ -14,7 +14,7 @@
 \method{diff}{summary.optcheck}(x, ...)
 }
 \arguments{
-\item{x}{Object of class \code{optcheck} or \code{summary.optcheck}, currently returned by \code{\link{optim_proj}}, \code{\link{optim_refit}}, or a summary of either of those calls.}
+\item{x}{Object of class \code{optcheck} or \code{summary.optcheck}, currently returned by \code{\link[=optim_proj]{optim_proj()}}, \code{\link[=optim_refit]{optim_refit()}}, or a summary of either of those calls.}
 
 \item{...}{Further arguments to be passed to or from other methods.}
 }

@@ -1,20 +1,19 @@
-#' \code{summary} method for \code{optrefit} objects.
+#' `summary` method for `optrefit` objects.
 #'
-#' @name summary.optrefit
-#' @param object An \code{optrefit} object, i.e., output from the function \code{\link{optim_refit}}.
+#' @param object An `optrefit` object, i.e., output from the function [optim_refit()].
 #' @param xnames Optional vector of names for the elements of the potential solution.
 #' @param ... Further arguments to be passed to or from other methods.
-#' @return An object of class \code{summary.optrefit} inheriting from \code{summary.optcheck}, with elements:
+#' @return An object of class `summary.optrefit` inheriting from `summary.optcheck`, with elements:
 #' \describe{
-#'   \item{\code{xsol}}{The potential solution vector.}
-#'   \item{\code{ysol}}{The value of the objective function at \code{xsol}.}
-#'   \item{\code{maximize}}{Logical indicating whether the potential solution should maximize or minimize the objective function.}
-#'   \item{\code{xopt}}{A vector containing the argmax/argmin in each projection plot.}
-#'   \item{\code{yopt}}{The scalar value of the max/min found by \code{optim_refit}.}
-#'   \item{\code{xdiff}}{A two-column matrix containing the differences between \code{xsol} and \code{xopt}.  The first column is the absolute difference \code{D = xopt - xsol}, the second is the relative difference \code{R = D/|xsol|}.}
-#'   \item{\code{ydiff}}{A length-two vector containing the absolute and relative difference between \code{ysol} and \code{yopt}.}
+#'   \item{`xsol`}{The potential solution vector.}
+#'   \item{`ysol`}{The value of the objective function at `xsol`.}
+#'   \item{`maximize`}{Logical indicating whether the potential solution should maximize or minimize the objective function.}
+#'   \item{`xopt`}{A vector containing the argmax/argmin in each projection plot.}
+#'   \item{`yopt`}{The scalar value of the max/min found by `optim_refit`.}
+#'   \item{`xdiff`}{A two-column matrix containing the differences between `xsol` and `xopt`.  The first column is the absolute difference `D = xopt - xsol`, the second is the relative difference `R = D/|xsol|`.}
+#'   \item{`ydiff`}{A length-two vector containing the absolute and relative difference between `ysol` and `yopt`.}
 #' }
-#' @seealso \code{\link{print.summary.optcheck}} for \code{print} method.
+#' @seealso [print.summary.optcheck()] for `print` method.
 #' @export
 summary.optrefit <- function(object, xnames, ...) {
   xsol <- object$xsol

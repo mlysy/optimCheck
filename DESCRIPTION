@@ -1,8 +1,8 @@
 Package: optimCheck
 Type: Package
 Title: Graphical and Numerical Checks for Mode-Finding Routines
-Version: 1.0
-Date: 2019-10-06
+Version: 1.0.0.9000
+Date: 2024-09-04
 Author: Martin Lysy
 Maintainer: Martin Lysy <mlysy@uwaterloo.ca>
 Description: Tools for checking that the output of an optimization algorithm is indeed at a local mode of the objective function.  This is accomplished graphically by calculating all one-dimensional "projection plots" of the objective function, i.e., varying each input variable one at a time with all other elements of the potential solution being fixed.  The numerical values in these plots can be readily extracted for the purpose of automated and systematic unit-testing of optimization routines.  
@@ -10,7 +10,8 @@ URL: https://github.com/mlysy/optimCheck
 BugReports: https://github.com/mlysy/optimCheck/issues
 License: GPL-3
 Imports: stats, graphics
-RoxygenNote: 6.1.1
+RoxygenNote: 7.3.1
 Encoding: UTF-8
 Suggests: testthat, quantreg, mclust, knitr, rmarkdown
 VignetteBuilder: knitr
+Roxygen: list(markdown = TRUE)

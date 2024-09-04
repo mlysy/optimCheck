@@ -1,17 +1,17 @@
-#' \code{summary} method for \code{optrefit} objects.
+#' `summary` method for `optrefit` objects.
 #'
 #' @name summary.optrefit
 #' @aliases print.optrefit print.summary.optrefit
-#' @param object An \code{optrefit} object, i.e., output from the function \code{\link{optim_refit}}.
+#' @param object An `optrefit` object, i.e., output from the function [optim_refit()].
 #' @param xnames Optional vector of names for the elements of the potential solution.
 #' @return A list with elements:
 #' \describe{
-#'   \item{\code{xsol}}{The potential solution vector.}
-#'   \item{\code{ysol}}{The value of the objective function at \code{xsol}.}
-#'   \item{\code{xopt}}{A vector containing the argmax/argmin in each projection plot.}
-#'   \item{\code{yopt}}{A vector containing the max/min in each projection plot.}
-#'   \item{\code{xdiff}}{A two-column matrix containing the differences between \code{xsol} and \code{xopt}.  The first column is the absolute difference \code{D = xopt - xsol}, the second is the relative difference \code{R = D/|xsol|}.}
-#'   \item{\code{ydiff}}{A length-two vector containing the absolute and relative difference between \code{ysol} and \code{yopt}.}
+#'   \item{`xsol`}{The potential solution vector.}
+#'   \item{`ysol`}{The value of the objective function at `xsol`.}
+#'   \item{`xopt`}{A vector containing the argmax/argmin in each projection plot.}
+#'   \item{`yopt`}{A vector containing the max/min in each projection plot.}
+#'   \item{`xdiff`}{A two-column matrix containing the differences between `xsol` and `xopt`.  The first column is the absolute difference `D = xopt - xsol`, the second is the relative difference `R = D/|xsol|`.}
+#'   \item{`ydiff`}{A length-two vector containing the absolute and relative difference between `ysol` and `yopt`.}
 #' }
 #' @export
 summary.optrefit <- function(object, xnames) {

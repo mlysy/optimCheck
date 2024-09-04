@@ -4,11 +4,10 @@
 \alias{plot.optproj}
 \title{Projection plots for optimization routines.}
 \usage{
-\method{plot}{optproj}(x, xnames, xind, equalize = FALSE, layout, xlab,
-  ylab, ...)
+\method{plot}{optproj}(x, xnames, xind, equalize = FALSE, layout, xlab, ylab, ...)
 }
 \arguments{
-\item{x}{An \code{optproj} object, i.e., output from function \code{\link{optim_proj}}.}
+\item{x}{An \code{optproj} object, i.e., output from function \code{\link[=optim_proj]{optim_proj()}}.}
 
 \item{xnames}{Optional vector of element names of potential solution for plot titles.}
 

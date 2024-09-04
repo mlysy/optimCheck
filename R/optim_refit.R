@@ -2,24 +2,24 @@
 #'
 #' If the potential solution is indeed a local optimum of the objective function, and if it is used to initialize a second optimization, then original and "refined" solutions ought to be close.
 #'
-#' @param xsol Potential solution vector of length \code{nx}.
-#' @param fun Objective function to be maximized (or minimized), with first argument the length-\code{nx} parameter vector over which optimization is to take place.  Should return a scalar result.
+#' @param xsol Potential solution vector of length `nx`.
+#' @param fun Objective function to be maximized (or minimized), with first argument the length-`nx` parameter vector over which optimization is to take place.  Should return a scalar result.
 #' @param maximize Logical, whether a maximum or a minimum of the objective function is sought.
-#' @param maxit Maximum number of iterations for \code{\link[stats]{optim}} refit (see Details).
-#' @param reltol Relative tolerance for convergence of \code{\link[stats]{optim}} refit (see Details).
+#' @param maxit Maximum number of iterations for [stats::optim()] refit (see Details).
+#' @param reltol Relative tolerance for convergence of [stats::optim()] refit (see Details).
 #' @param xopt Optional refit solution calculated externally from an optimization algorithm of choice (see Details).
-#' @return An object of class \code{optrefit} inheriting from \code{optcheck}, with elements:
+#' @return An object of class `optrefit` inheriting from `optcheck`, with elements:
 #' \describe{
-#'   \item{\code{xsol}}{The potential solution.}
-#'   \item{\code{ysol}}{The value of \code{fun(xsol)}.}
-#'   \item{\code{maximize}}{Logical indicating whether the potential solution should maximize or minimize the objective function.}
-#'   \item{\code{xopt}}{The solution found by the general-purpose optimizer.}
-#'   \item{\code{yopt}}{The function value at the optimal solution, i.e., \code{fun(xopt)}.}
+#'   \item{`xsol`}{The potential solution.}
+#'   \item{`ysol`}{The value of `fun(xsol)`.}
+#'   \item{`maximize`}{Logical indicating whether the potential solution should maximize or minimize the objective function.}
+#'   \item{`xopt`}{The solution found by the general-purpose optimizer.}
+#'   \item{`yopt`}{The function value at the optimal solution, i.e., `fun(xopt)`.}
 #' }
-#' @details By default, a so-called **refi**ned op(**t**)imization (or refit) test is performed by running the default Nelder-Mead simplex method provided by \code{\link[stats]{optim}}, initialized by the potential solution \code{xsol}.  Only a simplified interface to \code{\link[stats]{optim}}'s control parameters are provided here.
+#' @details By default, a so-called **refi**ned op(**t**)imization (or refit) test is performed by running the default Nelder-Mead simplex method provided by [stats::optim()], initialized by the potential solution `xsol`.  Only a simplified interface to [stats::optim()]'s control parameters are provided here.
 #'
-#' Alternatively, the refit test can be performed with any optimization algorithm of choice.  This is done externally, with the refined solution passed to \code{optim_refit} via the argument \code{xopt}.
-#' @seealso \code{summary}, \code{print}, and \code{diff} for \code{optrefit} objects are available; see \code{\link{summary.optrefit}}, \code{\link{print.optrefit}}, and \code{\link{diff.optrefit}}.
+#' Alternatively, the refit test can be performed with any optimization algorithm of choice.  This is done externally, with the refined solution passed to `optim_refit()` via the argument `xopt`.
+#' @seealso `summary`, `print`, and `diff` for `optrefit` objects are available; see [summary.optrefit()], [print.optrefit()], and [diff.optrefit()].
 #' @export
 optim_refit <- function(xsol, fun, maximize = TRUE,
                         maxit = 5e3, reltol = 1e-8, xopt) {

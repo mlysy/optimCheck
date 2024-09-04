@@ -1,19 +1,19 @@
-#' \code{summary} method for projection plots.
+#' `summary` method for projection plots.
 #'
 #' @name summary.optproj
 #' @aliases print.optproj print.summary.optproj
-#' @param object An \code{optproj} object, i.e., output from the function \code{\link{optim_proj}}.
+#' @param object An `optproj` object, i.e., output from the function [optim_proj()].
 #' @param xnames Optional vector of names for the elements of the potential solution.
-#' @return A \code{summary.optproj} object with elements:
+#' @return A `summary.optproj` object with elements:
 #' \describe{
-#'   \item{\code{xsol}}{The potential solution vector.}
-#'   \item{\code{ysol}}{The value of the objective function at \code{xsol}.}
-#'   \item{\code{xopt}}{A vector containing the argmax/argmin in each projection plot.}
-#'   \item{\code{yopt}}{A vector containing the max/min in each projection plot.}
-#'   \item{\code{xdiff}}{A two-column matrix containing the differences between \code{xsol} and \code{xopt}.  The first column is the absolute difference \code{D = xopt - xsol}, the second is the relative difference \code{R = D/|xsol|}.}
-#'   \item{\code{ydiff}}{Same thing, but between \code{ysol} and \code{yopt}.}
+#'   \item{`xsol`}{The potential solution vector.}
+#'   \item{`ysol`}{The value of the objective function at `xsol`.}
+#'   \item{`xopt`}{A vector containing the argmax/argmin in each projection plot.}
+#'   \item{`yopt`}{A vector containing the max/min in each projection plot.}
+#'   \item{`xdiff`}{A two-column matrix containing the differences between `xsol` and `xopt`.  The first column is the absolute difference `D = xopt - xsol`, the second is the relative difference `R = D/|xsol|`.}
+#'   \item{`ydiff`}{Same thing, but between `ysol` and `yopt`.}
 #' }
-#' @details The \code{print} methods for \code{summary.optproj} and \code{optproj} objects themselves both return a three-column matrix, consisting of the potential solution (\code{xsol}), the optimal solution in each projection plot (\code{xopt}), and the relative difference between the two (\code{R = (xopt - xsol)/|xsol|}).
+#' @details The `print` methods for `summary.optproj` and `optproj` objects themselves both return a three-column matrix, consisting of the potential solution (`xsol`), the optimal solution in each projection plot (`xopt`), and the relative difference between the two (`R = (xopt - xsol)/|xsol|`).
 #' @export
 summary.optproj <- function(object, xnames) {
   xsol <- object$xsol
