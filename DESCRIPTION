@@ -1,7 +1,7 @@
 Package: optimCheck
 Type: Package
 Title: Graphical and Numerical Checks for Mode-Finding Routines
-Version: 1.0.0.9000
+Version: 1.0.1
 Date: 2024-09-04
 Author: Martin Lysy
 Maintainer: Martin Lysy <mlysy@uwaterloo.ca>

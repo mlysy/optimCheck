@@ -4,3 +4,7 @@
 ^README.md$
 ^tests/dontrun$
 ^man-roxygen$
+^examples$
+^docs$
+^pkgdown$
+^\.github$
