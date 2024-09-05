@@ -8,7 +8,7 @@ Authors@R: person(given = "Martin",
 		  role = c("aut", "cre"),
 		  email = "mlysy@uwaterloo.ca")
 Description: Tools for checking that the output of an optimization algorithm is indeed at a local mode of the objective function.  This is accomplished graphically by calculating all one-dimensional "projection plots" of the objective function, i.e., varying each input variable one at a time with all other elements of the potential solution being fixed.  The numerical values in these plots can be readily extracted for the purpose of automated and systematic unit-testing of optimization routines.  
-URL: https://github.com/mlysy/optimCheck
+URL: https://github.com/mlysy/optimCheck, https://mlysy.github.io/optimCheck/
 BugReports: https://github.com/mlysy/optimCheck/issues
 License: GPL-3
 Imports: stats, graphics
