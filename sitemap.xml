@@ -1,0 +1,19 @@
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/LICENSE-text.html</loc></url>
+<url><loc>/articles/index.html</loc></url>
+<url><loc>/articles/optimCheck.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/news/index.html</loc></url>
+<url><loc>/reference/diff.optcheck.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/optimCheck-package.html</loc></url>
+<url><loc>/reference/optim_proj.html</loc></url>
+<url><loc>/reference/optim_refit.html</loc></url>
+<url><loc>/reference/plot.optproj.html</loc></url>
+<url><loc>/reference/print.optcheck.html</loc></url>
+<url><loc>/reference/summary.optproj.html</loc></url>
+<url><loc>/reference/summary.optrefit.html</loc></url>
+</urlset>
+
