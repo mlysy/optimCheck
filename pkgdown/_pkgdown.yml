@@ -1,8 +1,6 @@
-destination:
-  /Users/mlysy/Documents/proj/website/mlysy.github.io/pkgdown/optimCheck/docs/
 development:
   mode: release
 template:
-  path: "pkgdown"
+  bootstrap: 3
   params:
     bootswatch: readable
