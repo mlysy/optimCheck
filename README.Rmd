@@ -1,0 +1,119 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+library(desc)
+
+#' Parse and format author list.
+get_authors <- function() {
+  authors <- format(eval(parse(text = desc_get("Authors@R"))),
+                    include = c("given", "family"))
+  paste0(authors, collapse = ", ")
+}
+
+#' Format description.
+#'
+#' @details Currently no formatting done, but could e.g., convert package names to hyperlinks.
+get_description <- function() {
+  desc_get("Description")
+}
+
+#' Create the CRAN installation instructions.
+#'
+#' @details If package is found on CRAN, provide [install.packages()] command and version number.  Otherwise do nothing.
+cran_install <- function() {
+  pkg_name <- desc_get("Package")
+  # check if cran version exists
+  cran_pkgs <- available.packages(filter = "CRAN")
+  if(pkg_name %in% cran_pkgs[,"Package"]) {
+    pkg_info <- cran_pkgs[pkg_name,]
+    cat(
+      paste0("To install the CRAN version (", pkg_info["Version"], "):"),
+      "",
+      "```r",
+      paste0('install.packages("', pkg_name,
+             '", INSTALL_opts = "--install-tests")'),
+      "```",
+      "",
+      sep = "\n"
+    )
+  }
+}
+
+#' Create the GitHub install command.
+github_install <- function() {
+  pkg_name <- desc_get("Package")
+  cat(
+    "```r",
+    paste0('devtools::install_github("mlysy/', pkg_name,
+           '", INSTALL_opts = "--install-tests")'),
+    "```",
+    sep = "\n"
+  )
+}
+
+#' Create call to package vignette.
+get_vignette <- function() {
+  pkg_name <- desc_get("Package")
+  paste0('`vignette("', pkg_name, '")`')
+}
+
+#' Create call to run testthat.
+get_tests <- function() {
+  pkg_name <- desc_get("Package")
+  cat(
+    "```r",
+    paste0('testthat::test_package("', pkg_name,
+           '", reporter = "progress")'),
+    "```",
+    sep = "\n"
+  )
+}
+```
+
+# `r desc_get("Package")`: `r desc_get("Title")`
+
+*`r get_authors()`*
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+---
+
+### Description
+
+`r get_description()`
+
+
+### Installation
+
+```{r cran-install, echo = FALSE, results = "asis"}
+cran_install()
+```
+
+To install the latest development version: first install the [**devtools**](https://CRAN.R-project.org/package=devtools) package, then:
+
+```{r github-install, echo = FALSE, results = "asis"}
+github_install()
+```
+
+### Usage
+
+A quick tutorial is provided in the package vignette: `r get_vignette()`.
+
+### Unit Tests
+
+To verify that the package has been installed correctly, you can run its unit tests.  First install the [**testthat**](https://CRAN.R-project.org/package=testthat) package, then:
+
+```{r unit-tests, echo = FALSE, results = "asis"}
+get_tests()
+```
